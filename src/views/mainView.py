@@ -13,7 +13,7 @@ class MainView:
         # Centra la finestra sullo schermo
         self.center_window()
         
-        # Footer (deve essere creato prima per apparire in fondo)
+       
         footerlabel = tk.Label(self.root, text="Developed by Gregorio Neggia", 
                               font=("SF Pro Display", 12), 
                               bg="#1a1a2e", 

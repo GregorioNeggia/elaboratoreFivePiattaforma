@@ -11,4 +11,7 @@ class AppController:
 
 
 
+    def sceltaLogica(scelta):
+        pass
+
     

@@ -8,11 +8,24 @@ import pandas as pd
 
 class CSVController:
 
+    PATH_OUT = "utils/Csv/import(13).csv"
 
     def __init__(self, csv_service):
         self.csv_service = csv_service
 
+    
 
+    def uploadOutput(self):
+        try:
+            with open(self.PATH_OUT, mode='r', encoding='utf-8') as file:
+                df = pd.read_csv(file)
+                return df
+        except FileNotFoundError:
+            print(f"Errore: Il file '{self.PATH_OUT}' non è stato trovato.")
+        except pd.errors.EmptyDataError:
+            print(f"Errore: Il file '{self.PATH_OUT}' è vuoto o non contiene dati validi.")
+        except Exception as e:
+            print(f"Errore imprevisto: {e}")
 
 
     

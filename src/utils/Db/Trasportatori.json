@@ -1,965 +1,1158 @@
 [
 	{
+		"id": 0,
 		"nome" : "A.R.O SRL",
 		"indirizzo" : "VIA BRESCIA N. 52",
 		"cf" : "2082560174"
 	},
 	{
+		"id": 1,
 		"nome" : "A.R.O. S.R.L.",
 		"indirizzo" : "X",
 		"cf" : "X"
 	},
 	{
+		"id": 2,
 		"nome" : "A.R.O. SRL",
 		"indirizzo" : "Via Brescia",
 		"cf" : "00682670989"
 	},
 	{
+		"id": 3,
 		"nome" : "A2A AMBIENTE S.P.A.",
 		"indirizzo" : "Via Lamarmora",
 		"cf" : "0000000001"
 	},
 	{
+		"id": 4,
 		"nome" : "A2A AMBIENTE Spa",
 		"indirizzo" : "Via Lamarmora",
 		"cf" : "01066840180"
 	},
 	{
+		"id": 5,
 		"nome" : "A2A AMBIENTE SPA - PIATTAFORMA DI CASTENEDOLO",
 		"indirizzo" : "X",
 		"cf" : "XX"
 	},
 	{
+		"id": 6,
 		"nome" : "AGLIOLI ANGELO SRL",
 		"indirizzo" : "Via E. Fermi",
 		"cf" : "00878120161"
 	},
 	{
+		"id": 7,
 		"nome" : "AGLIONI ANGELO S.R.L.",
 		"indirizzo" : "X",
 		"cf" : "X"
 	},
 	{
+		"id": 8,
 		"nome" : "AGLIONI ANGELO S.R.L. UNIPERSONALE",
 		"indirizzo" : "VIA E. FERMI",
 		"cf" : "00878120161"
 	},
 	{
+		"id": 9,
 		"nome" : "AGLIONI ANGELO SRL",
 		"indirizzo" : "VIA E. FERMI N. 26",
 		"cf" : "87812161"
 	},
 	{
+		"id": 10,
 		"nome" : "AGLIONI ANGELO SRL UNIPERSONALE",
 		"indirizzo" : "via Enrico Fermi",
 		"cf" : "00878120161 "
 	},
 	{
+		"id": 11,
 		"nome" : "APRICA S.p.A.",
 		"indirizzo" : "VIA LAMARMORA ",
 		"cf" : "00802250175"
 	},
 	{
+		"id": 12,
 		"nome" : "ASM CODOGNO S.R.L.",
 		"indirizzo" : "viale Trieste",
 		"cf" : "10565220158"
 	},
 	{
+		"id": 13,
 		"nome" : "AUTOTRASPORTI BENDOTTI S.R.L.",
 		"indirizzo" : "X",
 		"cf" : "X"
 	},
 	{
+		"id": 14,
 		"nome" : "AUTOTRASPORTI BENDOTTI SRL",
 		"indirizzo" : "VIA CARBONERA N. 9",
 		"cf" : "3771170168"
 	},
 	{
+		"id": 15,
 		"nome" : "AUTOTRASPORTI BENOTTI s.r.l",
 		"indirizzo" : "Via Carbonera",
 		"cf" : "03771170168,"
 	},
 	{
+		"id": 16,
 		"nome" : "AUTOTRASPORTI GHISETTI ADRIANO",
 		"indirizzo" : "VIA A.MANZONI",
 		"cf" : "02844930160"
 	},
 	{
+		"id": 17,
 		"nome" : "AUTOTRASPORTI IZZO GROUP S.R.L.",
 		"indirizzo" : "Via San Giuseppe",
 		"cf" : "07476450965"
 	},
 	{
+		"id": 18,
 		"nome" : "AVR SPA",
 		"indirizzo" : "Via Francesco Tensi",
 		"cf" : "00931311005 "
 	},
 	{
+		"id": 19,
 		"nome" : "AVR SPA ROMA",
 		"indirizzo" : "via Francesco Tensi",
 		"cf" : "00931311005"
 	},
 	{
+		"id": 20,
 		"nome" : "Bassanetti srl",
 		"indirizzo" : "Via del Pilastrello",
 		"cf" : "04615970961"
 	},
 	{
+		"id": 21,
 		"nome" : "BENZONI ECOSOLUTION SRL",
 		"indirizzo" : "VIA VOGNO",
 		"cf" : "03603050166"
 	},
 	{
+		"id": 22,
 		"nome" : "BERAKAH SOCIETA' COOPERATIVA SOCIALE",
 		"indirizzo" : "VIA DELLA LIRA ITALIANA ",
 		"cf" : "VVVV"
 	},
 	{
+		"id": 23,
 		"nome" : "BERTULEZZI GIULIO SNC",
 		"indirizzo" : "Via Kennedy",
 		"cf" : "01634490161"
 	},
 	{
+		"id": 24,
 		"nome" : "BERTULEZZI GIULIO SNC DI BERTULEZZI SAMUELE & C.",
 		"indirizzo" : "Via Kennedy",
 		"cf" : "01634490161"
 	},
 	{
+		"id": 25,
 		"nome" : "BERTULEZZI GIULIO SNC DI BERTULEZZI SAMUELE E",
 		"indirizzo" : "VIA KENNEDY",
 		"cf" : "01634490161"
 	},
 	{
+		"id": 26,
 		"nome" : "BETA SOCIETA' COOP. SOCIALE",
 		"indirizzo" : "via Vassanelli",
 		"cf" : "02566350233"
 	},
 	{
+		"id": 27,
 		"nome" : "BETA SOCIETA' COOP.SOCIALE",
 		"indirizzo" : "VIA PIETRO VASSANELLI ",
 		"cf" : "02566350233"
 	},
 	{
+		"id": 28,
 		"nome" : "BETA SOCIETA' COOPERATIVA SOCIALE",
 		"indirizzo" : "VIA PIETRO VASSANELLI",
 		"cf" : "02566350233"
 	},
 	{
+		"id": 29,
 		"nome" : "BETA SOCIETA` COOPERATIVA SOCIALE",
 		"indirizzo" : "Via P. Vassanelli",
 		"cf" : "02566350233"
 	},
 	{
+		"id": 30,
 		"nome" : "BM ROTTAMI SRL",
 		"indirizzo" : "VIA MATTEOTTI ",
 		"cf" : "03953300161"
 	},
 	{
+		"id": 31,
 		"nome" : "BROGNOLI MILENA ",
 		"indirizzo" : "VIA CAVALIER MININI N. 1",
 		"cf" : "BRGMLN50C46H140G"
 	},
 	{
+		"id": 32,
 		"nome" : "CAUTO CANTIERE AUTOLIMITAZIONE - COOP.SOC.RL",
 		"indirizzo" : "Via Buffalora",
 		"cf" : "03329360170"
 	},
 	{
+		"id": 33,
 		"nome" : "CAUTO CANTIERE AUTOLIMITAZIONE COOP SOC A R.L",
 		"indirizzo" : "via Buffalora",
 		"cf" : "03329360170"
 	},
 	{
+		"id": 34,
 		"nome" : "CAUTO CANTIERE AUTOLIMITAZIONE COOPERATIVA SOCIALE A R.L.",
 		"indirizzo" : "Via Buffalora",
 		"cf" : "00000000001"
 	},
 	{
+		"id": 35,
 		"nome" : "CAUTO CANTIERE AUTOLIMITAZIONE CSRL",
 		"indirizzo" : "via Serenissma",
 		"cf" : "00000000003"
 	},
 	{
+		"id": 36,
 		"nome" : "CAUTO CANTIERE AUTOLIMITAZIONE SCARL",
 		"indirizzo" : "via Serenissima",
 		"cf" : "03329360170"
 	},
 	{
+		"id": 37,
 		"nome" : "CAUTO SOC. COOP. ARL",
 		"indirizzo" : "X",
 		"cf" : "X"
 	},
 	{
+		"id": 38,
 		"nome" : "Cem Ambiente",
 		"indirizzo" : "LOCALITA' CASCINA SOFIA",
 		"cf" : "03017130968"
 	},
 	{
+		"id": 39,
 		"nome" : "CEM AMBIENTE S.P.A.",
 		"indirizzo" : "Località Cascina Sofia",
 		"cf" : "03017130968"
 	},
 	{
+		"id": 40,
 		"nome" : "CERRO TORRE SOC. COOP.SOC.ONLUS",
 		"indirizzo" : "VIA PIRANDELLO ",
 		"cf" : "03238920171"
 	},
 	{
+		"id": 41,
 		"nome" : "CERRO TORRE SOCIETA' COOPERATIVA SOCIALE ONLUS",
 		"indirizzo" : "VIA PIRANDELLO",
 		"cf" : "03238920171"
 	},
 	{
+		"id": 42,
 		"nome" : "CHIARI SERVIZI SRL",
 		"indirizzo" : "via dell'Agricoltura",
 		"cf" : "01911350989 "
 	},
 	{
+		"id": 43,
 		"nome" : "CO.G.E.S SPA",
 		"indirizzo" : "Via Industriale",
 		"cf" : "00715260980 "
 	},
 	{
+		"id": 44,
 		"nome" : "CO.G.E.S. S.P.A.",
 		"indirizzo" : " Via Martinengo",
 		"cf" : "0000000001"
 	},
 	{
+		"id": 45,
 		"nome" : "COOP. CERRO TORRE arl",
 		"indirizzo" : "via Luigi Pirandello",
 		"cf" : "03238920171"
 	},
 	{
+		"id": 46,
 		"nome" : "COOPERATIVA IMPRESA SOCIALE RUAH",
 		"indirizzo" : "Via Capurso",
 		"cf" : "00000000001"
 	},
 	{
+		"id": 47,
 		"nome" : "COOPERATIVA IMPRESA SOCIALE RUAH SRL ONLUS",
 		"indirizzo" : "VIA MAURO GAVAZZENI",
 		"cf" : "03549340168"
 	},
 	{
+		"id": 48,
 		"nome" : "DISY TERMAP ITALIANA SAS",
 		"indirizzo" : "Via Cannizzaro",
 		"cf" : "04310860152 "
 	},
 	{
+		"id": 49,
 		"nome" : "DITTA COLOMBO BIAGIO SRL",
 		"indirizzo" : "VIA GOFFREDO MAMELI",
 		"cf" : "08010130154"
 	},
 	{
+		"id": 50,
 		"nome" : "DU.ECO SRL",
 		"indirizzo" : "Via S. Martina",
 		"cf" : "02792670164"
 	},
 	{
+		"id": 51,
 		"nome" : "DU.ECO. SRL",
 		"indirizzo" : "VIA SANTA MARTINA 23/25",
 		"cf" : "2792670164"
 	},
 	{
+		"id": 52,
 		"nome" : "ECO FLY S.R.L.",
 		"indirizzo" : "via More",
 		"cf" : "00000000001"
 	},
 	{
+		"id": 53,
 		"nome" : "ECO FLY SRL",
 		"indirizzo" : "via Moren",
 		"cf" : "02077050983"
 	},
 	{
+		"id": 54,
 		"nome" : "ECO VOS FACILITY MANAGEMENT",
 		"indirizzo" : "VIA EDISON",
 		"cf" : "03614510174"
 	},
 	{
+		"id": 55,
 		"nome" : "ECO VOS FACILITY MANAGEMENT SCS ONLUS",
 		"indirizzo" : "VIA EDISON SNC",
 		"cf" : "3614510174"
 	},
 	{
+		"id": 56,
 		"nome" : "ECO VOS Facility Management societa coop. sociale onlus",
 		"indirizzo" : "via Edison",
 		"cf" : "03614510174 "
 	},
 	{
+		"id": 57,
 		"nome" : "ECO-COMPANY SOC. COOP. SOCIALE",
 		"indirizzo" : "X",
 		"cf" : "X"
 	},
 	{
+		"id": 58,
 		"nome" : "ECO.S.E.I.B. SRL",
 		"indirizzo" : "VIA GEN.AZZARO ",
 		"cf" : "01438530881"
 	},
 	{
+		"id": 59,
 		"nome" : "ECOLOGY TRANSPORT S.R.L. UNIPERSONALE",
 		"indirizzo" : "Strada di Pedegaza fraz.Ciago",
 		"cf" : "01867490185"
 	},
 	{
+		"id": 60,
 		"nome" : "ECONOVA SRL",
 		"indirizzo" : "Corso Luigi Einaudi",
 		"cf" : "11739660014"
 	},
 	{
+		"id": 61,
 		"nome" : "ECOSERVIZI s.r.l - Ravasio Spurghi e Smaltimenti",
 		"indirizzo" : "Via Giovanni Carle",
 		"cf" : "04408240168"
 	},
 	{
+		"id": 62,
 		"nome" : "ECOSVILUPPO COOP. SOCIALE ONLUS",
 		"indirizzo" : "X",
 		"cf" : "X"
 	},
 	{
+		"id": 63,
 		"nome" : "ECOSVILUPPO SOCIETA' COOPERATIVA SOCIALE ONLUS",
 		"indirizzo" : "VIA CIRCONVALLAZIONE OVEST",
 		"cf" : "02413360161"
 	},
 	{
+		"id": 64,
 		"nome" : "EREDI PANINI OSVALDO SNC",
 		"indirizzo" : "Via Solferino",
 		"cf" : "05896660155 "
 	},
 	{
+		"id": 65,
 		"nome" : "EREDI PAPINI OSVALDO S.N.C.",
 		"indirizzo" : "X",
 		"cf" : "X"
 	},
 	{
+		"id": 66,
 		"nome" : "EREDI PAPINI OSVALDO SNC",
 		"indirizzo" : "via Solferino",
 		"cf" : "00000000002"
 	},
 	{
+		"id": 67,
 		"nome" : "EREDI PAPINI SNC",
 		"indirizzo" : "X",
 		"cf" : "X"
 	},
 	{
+		"id": 68,
 		"nome" : "ESSE EMME S.R.L.",
 		"indirizzo" : "X",
 		"cf" : "X"
 	},
 	{
+		"id": 69,
 		"nome" : "ESTRI S.R.L.",
 		"indirizzo" : "Via Campo Romano ",
 		"cf" : "0000000001"
 	},
 	{
+		"id": 70,
 		"nome" : "F.LLI DELPERO ",
 		"indirizzo" : "VIA L. CADORNA 68",
 		"cf" : "1058590173"
 	},
 	{
+		"id": 71,
 		"nome" : "F.LLI VESCOVI SNC",
 		"indirizzo" : "VIA DONIZETTI",
 		"cf" : "01829350162"
 	},
 	{
+		"id": 72,
 		"nome" : "F.LLI ZAPPETTINI S.R.L.",
 		"indirizzo" : "Via Cà Bertoncina",
 		"cf" : "01657860167"
 	},
 	{
+		"id": 73,
 		"nome" : "FACCHETTI FABIO SRL UNIPERSONALE",
 		"indirizzo" : "X",
 		"cf" : "X"
 	},
 	{
+		"id": 74,
 		"nome" : "FER.OL.MET SPA",
 		"indirizzo" : "via della Pace",
 		"cf" : "00000000001"
 	},
 	{
+		"id": 75,
 		"nome" : "FEROLMET SRL",
 		"indirizzo" : "Via della Pace",
 		"cf" : "058989040158"
 	},
 	{
+		"id": 76,
 		"nome" : "FRATELLI SALVETTI E C. SRL",
 		"indirizzo" : "VIA LUNGO SERIO",
 		"cf" : "01585310160"
 	},
 	{
+		"id": 77,
 		"nome" : "FRATERNITA' ECOLOGIA SOC.COOP. SOC.ONLUS",
 		"indirizzo" : "VIA PRESOLANA N. 54",
 		"cf" : "3614510174"
 	},
 	{
+		"id": 78,
 		"nome" : "G.ECO SRL",
 		"indirizzo" : "VIA ROGGIA VIGNOLA",
 		"cf" : "03772140160"
 	},
 	{
+		"id": 79,
 		"nome" : "G.V. MACERO SPA",
 		"indirizzo" : "VIA G. GARIBALDI",
 		"cf" : "02514270160"
 	},
 	{
+		"id": 80,
 		"nome" : "GATTI S.R.L.",
 		"indirizzo" : "via Salvador Allende",
 		"cf" : "\tIT02247940360"
 	},
 	{
+		"id": 81,
 		"nome" : "GATTI SRL",
 		"indirizzo" : "via Allende",
 		"cf" : "00000000003"
 	},
 	{
+		"id": 82,
 		"nome" : "GECO SRL",
 		"indirizzo" : "VIA ROGGIA VIGNOLA",
 		"cf" : "03772140160"
 	},
 	{
+		"id": 83,
 		"nome" : "GELSIA AMBIENTE SRL",
 		"indirizzo" : "VIA CARAVAGGIO",
 		"cf" : "04153040961"
 	},
 	{
+		"id": 84,
 		"nome" : "GERMANI SPA",
 		"indirizzo" : "X",
 		"cf" : "X"
 	},
 	{
+		"id": 85,
 		"nome" : "GHISETTI ADRIANO",
 		"indirizzo" : "Via A.Manzoni",
 		"cf" : "02844930160"
 	},
 	{
+		"id": 86,
 		"nome" : "GV MACERO SPA",
 		"indirizzo" : "VIA GARIBALDI",
 		"cf" : "02514270160"
 	},
 	{
+		"id": 87,
 		"nome" : "H3 SRL",
 		"indirizzo" : "PIAZZA BORROMEO 10",
 		"cf" : "4179850963"
 	},
 	{
+		"id": 88,
 		"nome" : "HUMAN PEOPLE TO PEOPLE ITALIA SOC.COOP.A.R.",
 		"indirizzo" : "Via Bergamo",
 		"cf" : "03146260967"
 	},
 	{
+		"id": 89,
 		"nome" : "HUMANA PEOPLE TO PEOLPE ITALIA SOC.COOP A.R.L.",
 		"indirizzo" : "Via Bergamo",
 		"cf" : "03146260967"
 	},
 	{
+		"id": 90,
 		"nome" : "HUMANA PEOPLE TO PEOPLE ITALIA SCARL",
 		"indirizzo" : "Via Bergamo",
 		"cf" : "93524700155"
 	},
 	{
+		"id": 91,
 		"nome" : "HUMANA PEOPLE TO PEOPLE ITALIA SOCIETA' COOPERATIVA A RESPONSABILITA LIMITATA ",
 		"indirizzo" : "VIA BERGAMO 9 - B/C",
 		"cf" : "12624380155"
 	},
 	{
+		"id": 92,
 		"nome" : "HUMANA PEOPLE TO PEOPLE SOC.COOP. A R.L.",
 		"indirizzo" : "VIA BERGAMO",
 		"cf" : "12624380155"
 	},
 	{
+		"id": 93,
 		"nome" : "ICOR ROTTAMI SRL",
 		"indirizzo" : "X",
 		"cf" : "X"
 	},
 	{
+		"id": 94,
 		"nome" : "IL GELSO COOPERATIVA SOCIALE ONLUS",
 		"indirizzo" : "Via dei Mugnai",
 		"cf" : "03350580175"
 	},
 	{
+		"id": 95,
 		"nome" : "IL SANDALO  SOC. COOP. SOCIALE ONLUS",
 		"indirizzo" : "VIA EDISONO",
 		"cf" : "3382190175"
 	},
 	{
+		"id": 96,
 		"nome" : "IMBALCARTA S.R.L.",
 		"indirizzo" : "via Pontoglio",
 		"cf" : "00662620988"
 	},
 	{
+		"id": 97,
 		"nome" : "Impresa Sangalli Giancarlo & C. S.r.l.",
 		"indirizzo" : "Viale Enrico Fermi",
 		"cf" : "00847160967"
 	},
 	{
+		"id": 98,
 		"nome" : "ISOLANTI LEFFE S.R.L.",
 		"indirizzo" : "X",
 		"cf" : "X"
 	},
 	{
+		"id": 99,
 		"nome" : "ISOLANTI LEFFE SRL",
 		"indirizzo" : "VIA DONISETTI",
 		"cf" : "03898040161"
 	},
 	{
+		"id": 100,
 		"nome" : "JOBBING SOCIETA' COOPERATIVA",
 		"indirizzo" : "Via Cagnoni",
 		"cf" : "11229180150"
 	},
 	{
+		"id": 101,
 		"nome" : "LA BI.CO DUE SRL",
 		"indirizzo" : "XXX",
 		"cf" : "XXX"
 	},
 	{
+		"id": 102,
 		"nome" : "LA NETTATUTTO SRL",
 		"indirizzo" : "Via Don Gnocchi",
 		"cf" : "00798290961"
 	},
 	{
+		"id": 103,
 		"nome" : "LA RAVELLESE ROTTAMI SRL",
 		"indirizzo" : "VIA PIEMONTE",
 		"cf" : "06355830156"
 	},
 	{
+		"id": 104,
 		"nome" : "LA RECUPERA DI RAMPINELLI MIRCO",
 		"indirizzo" : "via Fornaci",
 		"cf" : "0000000008"
 	},
 	{
+		"id": 105,
 		"nome" : "LAINI ALBERTO",
 		"indirizzo" : "VIA BETTOLE",
 		"cf" : "LNALRT66P20A794O"
 	},
 	{
+		"id": 106,
 		"nome" : "LATIN TRANSPORT DRIVERS SNC",
 		"indirizzo" : "VIA SOFONISBA ANGUISSOLA",
 		"cf" : "07506550966"
 	},
 	{
+		"id": 107,
 		"nome" : "LAVORO & ACCOGLIENZA COOPERATIVA SOCIALE",
 		"indirizzo" : "xxx",
 		"cf" : "0000000008"
 	},
 	{
+		"id": 108,
 		"nome" : "LINEA ENERGIA SPA ",
 		"indirizzo" : "X",
 		"cf" : "X"
 	},
 	{
+		"id": 109,
 		"nome" : "LINEA GESTIONI",
 		"indirizzo" : "VIA DEL COMMERCIO",
 		"cf" : "01426500193"
 	},
 	{
+		"id": 110,
 		"nome" : "LINEA GESTIONI S.R.L.",
 		"indirizzo" : "VIA DEL COMMERCIO 29",
 		"cf" : "1426500193"
 	},
 	{
+		"id": 111,
 		"nome" : "LINEA GESTIONI S.R.L. - N. ISCR. C/T CRT1603310 P",
 		"indirizzo" : "via del Commercio",
 		"cf" : "01426500193"
 	},
 	{
+		"id": 112,
 		"nome" : "LINEA GESTIONI SRL",
 		"indirizzo" : "via Alessandro Volta",
 		"cf" : "00000000001"
 	},
 	{
+		"id": 113,
 		"nome" : "LOGISTIC TRANS DI BOLETTI ANDREA",
 		"indirizzo" : "via Santigaro",
 		"cf" : "00000000001"
 	},
 	{
+		"id": 114,
 		"nome" : "MACOGLASS SRL",
 		"indirizzo" : "VIA G. NATTA",
 		"cf" : "00811390160"
 	},
 	{
+		"id": 115,
 		"nome" : "MAINETTI S.R.L",
 		"indirizzo" : "Via Valmontana Alta",
 		"cf" : "00217700335"
 	},
 	{
+		"id": 116,
 		"nome" : "MAINETTI srl",
 		"indirizzo" : "Via Valmontana Alta",
 		"cf" : "00000000001"
 	},
 	{
+		"id": 117,
 		"nome" : "METAL TRASPORTI SRL",
 		"indirizzo" : "VIA TIRABOSCHI",
 		"cf" : "03715600163"
 	},
 	{
+		"id": 118,
 		"nome" : "MONT.ECOLOGY di ZILIANI e ARCH ETTI SNC",
 		"indirizzo" : "loc. Menzino",
 		"cf" : "01692140179"
 	},
 	{
+		"id": 119,
 		"nome" : "NEW CONSULT AMBIENTE SRL",
 		"indirizzo" : "Via 8 Marzo",
 		"cf" : "03083180178"
 	},
 	{
+		"id": 120,
 		"nome" : "NEW ROGLASS S.R.L.",
 		"indirizzo" : "Via Torino",
 		"cf" : "08624050962 |"
 	},
 	{
+		"id": 121,
 		"nome" : "NIAL NIZZOLI S.R.L.",
 		"indirizzo" : "VIA FOSDONDO",
 		"cf" : "01684790353"
 	},
 	{
+		"id": 122,
 		"nome" : "NIAL NIZZOLI SRL",
 		"indirizzo" : "VIA FOSDONDO",
 		"cf" : "01684790353"
 	},
 	{
+		"id": 123,
 		"nome" : "Non specificato",
 		"indirizzo" : "nd",
 		"cf" : "00000000000"
 	},
 	{
+		"id": 124,
 		"nome" : "NORD RECUPERI S.R.L.",
 		"indirizzo" : "VIA A. COSTA ",
 		"cf" : "07484830158"
 	},
 	{
+		"id": 125,
 		"nome" : "OLIMPIC COMMERCE",
 		"indirizzo" : "Via Arti e Mestieri  angolo Via Lazzarini da Caravaggio",
 		"cf" : "01613640166"
 	},
 	{
+		"id": 126,
 		"nome" : "ORSATO SNC DI ORSATO LUCA & C. AUTOTRASPORTI",
 		"indirizzo" : "via Olivelli",
 		"cf" : "0000000001"
 	},
 	{
+		"id": 127,
 		"nome" : "P.M. DI PETTINARI MASSIMO",
 		"indirizzo" : "X",
 		"cf" : "X"
 	},
 	{
+		"id": 128,
 		"nome" : "POLICARTA SRL",
 		"indirizzo" : "X",
 		"cf" : "X"
 	},
 	{
+		"id": 129,
 		"nome" : "PRIVATI CITTADINI",
 		"indirizzo" : "X",
 		"cf" : "X"
 	},
 	{
+		"id": 130,
 		"nome" : "PS SRL",
 		"indirizzo" : "VIA I MAGGIO",
 		"cf" : "03820510984"
 	},
 	{
+		"id": 131,
 		"nome" : "RECENTI GROUP  SRL",
 		"indirizzo" : "via Aldo Kupfer",
 		"cf" : "IT03328210988"
 	},
 	{
+		"id": 132,
 		"nome" : "RECENTI GROUP SRL",
 		"indirizzo" : "via Aldo Kupfer",
 		"cf" : "03328210988"
 	},
 	{
+		"id": 133,
 		"nome" : "RECOIL S.R.L.",
 		"indirizzo" : "X",
 		"cf" : "X"
 	},
 	{
+		"id": 134,
 		"nome" : "RELIGHT S.R.L.",
 		"indirizzo" : "X",
 		"cf" : "X"
 	},
 	{
+		"id": 135,
 		"nome" : "RELIGHT SRL",
 		"indirizzo" : "via Lainate",
 		"cf" : "12647380158"
 	},
 	{
+		"id": 136,
 		"nome" : "RI.E.CO SRL",
 		"indirizzo" : "via Caboto",
 		"cf" : "00000000001"
 	},
 	{
+		"id": 137,
 		"nome" : "RI.E.CO. SRL",
 		"indirizzo" : "X",
 		"cf" : "X"
 	},
 	{
+		"id": 138,
 		"nome" : "RIFER SPA",
 		"indirizzo" : "via Palazzolo",
 		"cf" : "00630720985"
 	},
 	{
+		"id": 139,
 		"nome" : "RIFER SRL",
 		"indirizzo" : "VIA PALAZZOLO",
 		"cf" : "01473110177"
 	},
 	{
+		"id": 140,
 		"nome" : "S.E.A. SRL",
 		"indirizzo" : "Via Lungo Romna",
 		"cf" : "02498990163"
 	},
 	{
+		"id": 141,
 		"nome" : "SABB - SERVIZI AMBIENTALI BASSA BERGAMASCA S.P.A.",
 		"indirizzo" : "Via Palazzo",
 		"cf" : "02209730163"
 	},
 	{
+		"id": 142,
 		"nome" : "SAIANI TRASPORTI S.R.L.",
 		"indirizzo" : "Via G. La Pira",
 		"cf" : "00000000001"
 	},
 	{
+		"id": 143,
 		"nome" : "SANITARIA SERVIZI AMBIENTALI",
 		"indirizzo" : "Via della Ferrovia",
 		"cf" : "03186680983"
 	},
 	{
+		"id": 144,
 		"nome" : "SANITARIA SERVIZI AMBIENTALI SRL",
 		"indirizzo" : "via Santigaro",
 		"cf" : " 03970540963"
 	},
 	{
+		"id": 145,
 		"nome" : "SAVOLDI SRL",
 		"indirizzo" : "X",
 		"cf" : "X"
 	},
 	{
+		"id": 146,
 		"nome" : "SERVIZI COMUNALI SPA",
 		"indirizzo" : "VIA ROMA",
 		"cf" : "02546290160"
 	},
 	{
+		"id": 147,
 		"nome" : "SERVIZI COMUNALI SPA - VIA ROMA",
 		"indirizzo" : "VIA ROMA",
 		"cf" : "02546290160"
 	},
 	{
+		"id": 148,
 		"nome" : "SETRA SRL",
 		"indirizzo" : "VIA LA CROCE 10",
 		"cf" : "3295100139"
 	},
 	{
+		"id": 149,
 		"nome" : "SOLCO",
 		"indirizzo" : "VIA ROSE DI SOTTO",
 		"cf" : "01844010171"
 	},
 	{
+		"id": 150,
 		"nome" : "SOLIDARIETA MANERBIESE SOC. CO OOP. SOC.",
 		"indirizzo" : "Via Artigianale",
 		"cf" : "00000000000"
 	},
 	{
+		"id": 151,
 		"nome" : "SOLIDARIETÀ MANERBIESE SOC. COOP. SOC. ONLUS.",
 		"indirizzo" : "Via Artigianale",
 		"cf" : "00625720982"
 	},
 	{
+		"id": 152,
 		"nome" : "SOLIDARIETA' MANERBIESE",
 		"indirizzo" : "via Artigianale ",
 		"cf" : "00625720982"
 	},
 	{
+		"id": 153,
 		"nome" : "SOLIDARIETA' MANERBIESE - SOCIETA' COOPERATIV",
 		"indirizzo" : "X",
 		"cf" : "X"
 	},
 	{
+		"id": 154,
 		"nome" : "SOLIDARIETA' MANERBIESE COOP. SOCIALE",
 		"indirizzo" : "VIA ARTIGIANALE",
 		"cf" : "01428760175"
 	},
 	{
+		"id": 155,
 		"nome" : "SOLIDARIETA' MANERBIESE SOC. COOP. ONLUS",
 		"indirizzo" : "VIA ARTIGIANALE N. 9/B",
 		"cf" : "1428760175"
 	},
 	{
+		"id": 156,
 		"nome" : "SOLIDARIETA' MANERBIESE SOC. COOP. SOC. ONLUS",
 		"indirizzo" : "X",
 		"cf" : "X"
 	},
 	{
+		"id": 157,
 		"nome" : "SOLIDARIETA' MANERBIESE SOC.COOP.SOCIALE ONLUS",
 		"indirizzo" : "Via Artigianale ",
 		"cf" : "01428760175"
 	},
 	{
+		"id": 158,
 		"nome" : "SOLIDARIETA' MANERBIESE SOCIETA' COOPERATIVA ONLUS",
 		"indirizzo" : "Via Artigianale",
 		"cf" : "00625720982"
 	},
 	{
+		"id": 159,
 		"nome" : "STEEL & METALS LOGISTICA  S.R.L.",
 		"indirizzo" : "VIA MARROCCO ",
 		"cf" : "03899640985"
 	},
 	{
+		"id": 160,
 		"nome" : "STEGAGNO SRL ",
 		"indirizzo" : "VIA QUADRELLI ",
 		"cf" : "03480510233"
 	},
 	{
+		"id": 161,
 		"nome" : "STENA RECYCLING S.R.L",
 		"indirizzo" : "via Santa Maria in Campo",
 		"cf" : "00000000001"
 	},
 	{
+		"id": 162,
 		"nome" : "STENA RECYCLING S.R.L.",
 		"indirizzo" : "via Santa Maria in Campo",
 		"cf" : "000000000001"
 	},
 	{
+		"id": 163,
 		"nome" : "STENA RECYCLING SRL",
 		"indirizzo" : "VIA SANTA MARIA IN CAMPO ",
 		"cf" : "01237620172"
 	},
 	{
+		"id": 164,
 		"nome" : "STENA TECHNOWORD SRL - CAVENAGO BRIANZA",
 		"indirizzo" : "SANTA MARIA IN CAMPO ",
 		"cf" : "01237620172"
 	},
 	{
+		"id": 165,
 		"nome" : "STENA TECHNOWORLD ",
 		"indirizzo" : "VIA MARTORELLO 13",
 		"cf" : "1237620172"
 	},
 	{
+		"id": 166,
 		"nome" : "STENA TECHNOWORLD S.R.",
 		"indirizzo" : "Via dell'Industria",
 		"cf" : "01237620172"
 	},
 	{
+		"id": 167,
 		"nome" : "STENA TECHNOWORLD S.R.L",
 		"indirizzo" : "Via dell'Industria",
 		"cf" : "00000000005"
 	},
 	{
+		"id": 168,
 		"nome" : "STENA TECHNOWORLD S.R.L.",
 		"indirizzo" : "X",
 		"cf" : "X"
 	},
 	{
+		"id": 169,
 		"nome" : "STENA TECHNOWORLD SRL",
 		"indirizzo" : "via dell'Industria",
 		"cf" : "00000000005"
 	},
 	{
+		"id": 170,
 		"nome" : "STENA TECNOWORLD - CAVENAGO IN BRIANZA",
 		"indirizzo" : "VIA SANTA MARIA IN CAMPO 2",
 		"cf" : "1237620172"
 	},
 	{
+		"id": 171,
 		"nome" : "T.& T. TRASPORTI SRL",
 		"indirizzo" : "VIA UGO FOSCOLO ",
 		"cf" : "07792490968"
 	},
 	{
+		"id": 172,
 		"nome" : "T.R.F. S.R.L. TRASPORTI ROVATESI FRIGO NAZ. E INTERNAZ.SRL",
 		"indirizzo" : "VIA SERIOLA 3",
 		"cf" : "3430130983"
 	},
 	{
+		"id": 173,
 		"nome" : "TAO AMBIENTE SRL",
 		"indirizzo" : "Via Vittorio Veneto",
 		"cf" : "08721080961"
 	},
 	{
+		"id": 174,
 		"nome" : "TECNO RECUPERI S.P.A.",
 		"indirizzo" : "via dei Campazzi",
 		"cf" : "02359110133 -"
 	},
 	{
+		"id": 175,
 		"nome" : "TECNO RECUPERI SPA",
 		"indirizzo" : "PIAZZA GIOVANNI PAOLO II N. 21",
 		"cf" : "2359110133"
 	},
 	{
+		"id": 176,
 		"nome" : "TECNORECUPERI S.P.A.",
 		"indirizzo" : "X",
 		"cf" : "X"
 	},
 	{
+		"id": 177,
 		"nome" : "TEKNO SOLUZIONI SRL",
 		"indirizzo" : "X",
 		"cf" : "X"
 	},
 	{
+		"id": 178,
 		"nome" : "TERZI AMBIENTE SRL",
 		"indirizzo" : "VIA DEI TINTORI",
 		"cf" : "03212568098"
 	},
 	{
+		"id": 179,
 		"nome" : "TESAI SRL - TRASPORTI E SERVIZI AMBIENTALI PER L'IMPRESA",
 		"indirizzo" : "VIA ITALO CALVINO",
 		"cf" : "07463550967"
 	},
 	{
+		"id": 180,
 		"nome" : "TOSANA AUTOTRASPORTI DI TOSANA MORENO",
 		"indirizzo" : "via Nazionale",
 		"cf" : "0000000000001"
 	},
 	{
+		"id": 181,
 		"nome" : "TRANSFRIULI S.R.L.",
 		"indirizzo" : "X",
 		"cf" : "X"
 	},
 	{
+		"id": 182,
 		"nome" : "TRASPORTI DELTA S.R.L.",
 		"indirizzo" : "X",
 		"cf" : "X"
 	},
 	{
+		"id": 183,
 		"nome" : "TRASPORTI DELTA SRL",
 		"indirizzo" : "VIALE LOMBARDIA N.29",
 		"cf" : "1826750208"
 	},
 	{
+		"id": 184,
 		"nome" : "TREEE SRL",
 		"indirizzo" : "VIA GARBAGNATE ",
 		"cf" : "06278490963"
 	},
 	{
+		"id": 185,
 		"nome" : "VAL CAVALLINA SERVIZI SRL",
 		"indirizzo" : "Piazza Salvo d'Acquisto ",
 		"cf" : " 02544690163"
 	},
 	{
+		"id": 186,
 		"nome" : "VAL-FERRO SRL",
 		"indirizzo" : "via della Repubblica",
 		"cf" : "01509130983"
 	},
 	{
+		"id": 187,
 		"nome" : "Valcamonica servizi",
 		"indirizzo" : "Via Rigamonti",
 		"cf" : "0000000001"
 	},
 	{
+		"id": 188,
 		"nome" : "VALCART SNC",
 		"indirizzo" : "via Veneto",
 		"cf" : "00000000001"
 	},
 	{
+		"id": 189,
 		"nome" : "VALCART SNC F.LLI ALBERTINELLI & C.",
 		"indirizzo" : "Via Vittorio Veneto ",
 		"cf" : "00884400169"
 	},
 	{
+		"id": 190,
 		"nome" : "VALCART SRL",
 		"indirizzo" : "VIA VITTORIO VENETO",
 		"cf" : "00884400169"
 	},
 	{
+		"id": 191,
 		"nome" : "VCS",
 		"indirizzo" : "Piazza Salvo d'Acquisto",
 		"cf" : "02544690163"
 	},
 	{
+		"id": 192,
 		"nome" : "VF TRASPORTI",
 		"indirizzo" : "via Maestra ",
 		"cf" : "0000000001"

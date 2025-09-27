@@ -89,6 +89,7 @@ class CSVController:
 
 
     """METODI PER VCS"""
+    @staticmethod
     def uploadCSV_VCS(path):
         
         colonne_da_leggere = [1,5,6,8,9,10,12]
@@ -112,6 +113,10 @@ class CSVController:
 
 
 
+    """METODI PER ALTRO"""
+    @staticmethod
+    def upload_csvALTRO(path):
+        pass
 
 
     """METODO EXPORT CSV"""

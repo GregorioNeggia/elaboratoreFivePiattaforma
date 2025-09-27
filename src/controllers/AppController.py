@@ -11,7 +11,14 @@ class AppController:
 
 
 
-    def sceltaLogica(scelta):
-        pass
+    def popolaTabella(self, df):
+        """Popola la tabella con i dati del DataFrame"""
+        # Pulisce la tabella esistente
+        for item in self.tree.get_children():
+            self.tree.delete(item)
+        
+        # Aggiunge i nuovi dati
+        for index, row in df.iterrows():
+            self.tree.insert("", "end", values=list(row))
 
     

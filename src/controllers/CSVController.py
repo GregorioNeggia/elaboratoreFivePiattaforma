@@ -60,7 +60,7 @@ class CSVController:
 
 
     """METODI PER GECO"""
-    def upload_csvGECO(path):
+    def upload_csvGECO(self,path):
         try:
             with open(path, mode='r', encoding='utf-8') as file:
                 csv_reader = csv.reader(file)
@@ -89,8 +89,7 @@ class CSVController:
 
 
     """METODI PER VCS"""
-    @staticmethod
-    def uploadCSV_VCS(path):
+    def uploadCSV_VCS(self, path):
         
         colonne_da_leggere = [1,5,6,8,9,10,12]
 
@@ -114,7 +113,6 @@ class CSVController:
 
 
     """METODI PER ALTRO"""
-    @staticmethod
     def upload_csvALTRO(path):
         pass
 

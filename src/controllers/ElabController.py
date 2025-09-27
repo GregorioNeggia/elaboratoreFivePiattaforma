@@ -7,8 +7,8 @@ class ElabController:
 
     
 
-    def __init__(self, elab_service):
-        self.elab_service = elab_service
+    def __init__(self):
+        pass
 
 
 
@@ -18,29 +18,30 @@ class ElabController:
 
 
 
-
-
+    
 
 
     """METODI PER VCS"""
-    def elabVCS(self, df, dfOut, nomePa, trasportatore):
+    def elabVCS(self, df, columns, nomePa, trasportatore):
         try:
+            dfOut = pd.DataFrame(index=range(len(df)), columns=columns)
             for index, row in df.iterrows():
+                dfOut.loc[index, "NOME PA"] = "Comune di " + nomePa
+                dfOut.loc[index, "CER"] = row.iloc[2]
+                dfOut.loc[index, "nome DEST"] = row.iloc[1]
+                dfOut.loc[index, "nome TRASP"] = trasportatore["nome"]
+                dfOut.loc[index, "numero_formulario"] = row.iloc[6]
+                dfOut.loc[index, "data_raccolta"] = row.iloc[5]
+                dfOut.loc[index, "kg"] = row.iloc[4]
+                dfOut.loc[index, "Cod.Smalt."] = row.iloc[3]
 
-                dfOut.loc[index, 0] = "Comune di " + nomePa
-                dfOut.loc[index, 1] = row[2]
-                dfOut.loc[index, 2] = row[1]
-                dfOut.loc[index, 3] = trasportatore["nome"]
-                dfOut.loc[index, 4] = row[6]
-                dfOut.loc[index, 5] = row[5]
-                dfOut.loc[index, 6] = row[4]
-                dfOut.loc[index, 7] = row[3]
-
-                if df.loc[index, 7] == "1":
-                    dfOut.loc[index, 8] = "Comune di " + nomePa + ("(CDR)")
+                if row['CDR'] == 1:
+                    dfOut.loc[index, "Produttore rifiuto"] = "Comune di " + nomePa + ("(CDR)")
                 else:
-                    dfOut.loc[index, 8] = "Comune di " + nomePa + ("(M)")
+                    dfOut.loc[index, "Produttore rifiuto"] = "Comune di " + nomePa + ("(M)")
             
+            # Sostituisci NaN con stringhe vuote
+            dfOut = dfOut.fillna("")
             return dfOut
 
         except Exception as e:

@@ -26,8 +26,8 @@ ELABORATORE_CONFIG = {
         "process_method": "elaborate_aprica"
     },
     "VALCAVALLINA": {
-        "import_method": "uploadCsv_VCS",
-        "process_method": "elaborateVCS"
+        "import_method": "uploadCSV_VCS",
+        "process_method": "elabVCS"
     },
     "ALTRO": {
         "import_method": "upload_csvALTRO",

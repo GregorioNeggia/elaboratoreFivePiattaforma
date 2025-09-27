@@ -6,12 +6,15 @@ import json
 PATH_OUT = "utils/Csv/import(13).csv"
 PATH_TRASP = "utils/Db/Trasportatori.json"
 
+
 class CSVController:
 
     
 
-    def __init__(self, csv_service):
-        self.csv_service = csv_service
+    def __init__(self):
+        self.PATH_OUT = PATH_OUT
+        self.PATH_TRASP = PATH_TRASP
+        
 
     
 
@@ -96,9 +99,9 @@ class CSVController:
         try:
             with open(path, mode='r', encoding='utf-8') as file:
                 
-                df = pd.read_csv(file, usecols=colonne_da_leggere)
+                df = pd.read_csv(file, usecols=colonne_da_leggere, sep=';', header=0)
 
-                df['CDR'] = df.iloc[:, 0].apply(lambda x: 1 if "Centro raccolta" in str(x) else 0)
+                df['CDR'] = df.iloc[:, 0].apply(lambda x: 1 if "CENTRO RACCOLTA" in str(x) else 0)
 
                 return df
         except FileNotFoundError:

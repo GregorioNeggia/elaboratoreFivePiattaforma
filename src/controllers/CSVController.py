@@ -2,6 +2,7 @@ import csv
 import io
 import pandas as pd
 import json
+from utils.config.configuration import OUTPUT_COLUMNS
 
 PATH_OUT = "utils/Csv/import(13).csv"
 PATH_TRASP = "utils/Db/Trasportatori.json"
@@ -120,14 +121,44 @@ class CSVController:
         pass
 
 
-    """METODO EXPORT CSV"""
+        """METODO EXPORT CSV"""
     @staticmethod
-    def exportCSV(dfOut, Path):
+    def esporta(table):
+        """
+        Esporta i dati dalla tabella Treeview in un file CSV
+        """
         try:
-            dfOut.to_csv(Path, index=False, header=False, sep=';')
-            print(f"File CSV esportato con successo in '{Path}'")
+            # Ottieni tutte le righe dalla tabella
+            rows = []
+
+            for row_id in table.get_children():
+                row_values = table.item(row_id, 'values')
+                rows.append(list(row_values))
+
+            if not rows:
+                print("Nessun dato da esportare nella tabella")
+                return
+
+            # Crea DataFrame dai dati della tabella
+            df = pd.DataFrame(rows, columns=OUTPUT_COLUMNS)
+
+            # Chiedi all'utente dove salvare il file
+            from tkinter import filedialog
+            file_path = filedialog.asksaveasfilename(
+                defaultextension=".csv",
+                filetypes=[("File CSV", "*.csv"), ("Tutti i file", "*.*")],
+                title="Salva file CSV esportato"
+            )
+
+            if file_path:
+                # Usa il metodo esistente per esportare
+                df.to_csv(file_path, index=False, header=OUTPUT_COLUMNS, sep=';')
+                print(f"Dati esportati con successo in: {file_path}")
+            else:
+                print("Esportazione annullata dall'utente")
+
         except Exception as e:
-            print(f"Errore durante l'esportazione del file CSV: {e}")
+            print(f"Errore durante l'esportazione: {e}")
     
 
 

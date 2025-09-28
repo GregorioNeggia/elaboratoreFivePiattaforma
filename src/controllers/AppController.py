@@ -28,21 +28,14 @@ class AppController:
         elab_view = ElaboratoreView(elab_window, scelta, self)
         elab_window.mainloop()
 
+    def apriInfo(self):
+        from views.InfoView import InfoView
+        InfoView()
 
-    @staticmethod
-    def apriInfo():
-        from tkinter import Toplevel, Label
 
-        info_window = Toplevel()
-        info_window.title("Info")
-        info_window.geometry("400x200")
+    
 
-        info_label = Label(info_window, text="Elaboratore Five\nVersione 1.0\nSviluppato da Gregorio Neggia", font=("Arial", 12), justify="center")
-        info_label.pack(expand=True)
 
-        
-
-        info_window.mainloop()
 
 
     def elaborazione(self, nomePa, trasportatore, scelta, pathIn):

@@ -8,6 +8,7 @@ import tkinter as tk
 from tkinter import ttk, simpledialog, messagebox
 import json
 from tkinter import filedialog
+from controllers.CSVController import CSVController
 
 class ElaboratoreView:
     def __init__(self, root, scelta, AppController):
@@ -124,7 +125,7 @@ class ElaboratoreView:
         btn.pack(pady=20)
 
     def esporta(self):
-        pass
+        CSVController.esporta(self.table)
 
 
 

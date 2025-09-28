@@ -41,7 +41,7 @@ class ElabController:
                     dfOut.loc[index, "Produttore rifiuto"] = "Comune di " + nomePa + ("(M)")
             
             # Sostituisci NaN con stringhe vuote
-            dfOut = dfOut.fillna("")
+            dfOut = dfOut.fillna("").infer_objects(copy=False)
             return dfOut
 
         except Exception as e:

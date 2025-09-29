@@ -69,9 +69,14 @@ class CSVController:
         try:
             with open(path, mode='r', encoding='utf-8') as file:
                 df = pd.read_csv(file, usecols=colonne_da_leggere, sep=';', header=1)
-                # Rimuovi righe dove la quarta colonna contiene la parola "totale" (case-insensitive)
-                df = df[~df.iloc[:, 3].astype(str).str.strip().str.lower().str.contains('totale', na=False)].reset_index(drop=True)
+                # Rimuovi righe dove la quarta colonna è vuota o contiene la parola "totale" (case-insensitive)
+                col4 = df.iloc[:, 3]
+                non_empty = col4.notna() & (col4.astype(str).str.strip() != '')
+                not_totale = ~col4.astype(str).str.lower().str.contains('Totale', na=False)
+                df = df[non_empty & not_totale].reset_index(drop=True)
+
                 df['CDR'] = df.iloc[:, 0].apply(lambda x: 1 if "CDR" in str(x) else 0)
+                print(df)
                 return df
         except FileNotFoundError:
             print(f"Errore: Il file '{path}' non è stato trovato.")

@@ -18,7 +18,7 @@ ELABORATORE_CONFIG = {
 
     "GECO": {
         "import_method": "upload_csvGECO",
-        "process_method": "elaborate_geco",
+        "process_method": "elabGECO",
         "delimiter": ";"
     },
     "APRICA": {

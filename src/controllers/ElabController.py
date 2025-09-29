@@ -60,7 +60,7 @@ class ElabController:
 
     """METODI GECO"""
 
-    def elabGECO(self, df, columns, nomePa, trasportatore):
+    def elabGECO(self, df, columns, nomePa, trasportatore, percentuale=None):
         try:
             dfOut = pd.DataFrame(index=range(len(df)), columns=columns)
             for index, row in df.iterrows():
@@ -70,7 +70,20 @@ class ElabController:
                 dfOut.loc[index, "nome TRASP"] = trasportatore["nome"]
                 dfOut.loc[index, "numero_formulario"] = row.iloc[3]
                 dfOut.loc[index, "data_raccolta"] = row.iloc[2]
-                dfOut.loc[index, "kg"] = row.iloc[6]
+
+                # Calcolo kg: rendilo robusto se percentuale è None o valori non numerici
+                try:
+                    pct = 100.0 if percentuale is None else float(percentuale)
+                except Exception:
+                    pct = 100.0
+
+                try:
+                    raw_kg = row.iloc[6]
+                    kg_val = float(raw_kg) if pd.notna(raw_kg) and str(raw_kg).strip() != "" else 0.0
+                except Exception:
+                    kg_val = 0.0
+
+                dfOut.loc[index, "kg"] = kg_val * (pct / 100.0)
                 dfOut.loc[index, "Cod.Smalt."] = row.iloc[5]
                 # Gestione Produttore rifiuto basata su CDR per riga
                 try:
@@ -95,7 +108,6 @@ class ElabController:
             except Exception:
                 # Fallback semplice
                 dfOut = dfOut.fillna("")
-            return dfOut
             return dfOut
 
         except Exception as e:

@@ -77,6 +77,7 @@ class CSVController:
 
                 df['CDR'] = df.iloc[:, 0].apply(lambda x: 1 if "CDR" in str(x) else 0)
                 return df
+            
         except FileNotFoundError:
             print(f"Errore: Il file '{path}' non è stato trovato.")
         except pd.errors.EmptyDataError:

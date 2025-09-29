@@ -92,9 +92,9 @@ class ElaboratoreView:
 
 
     def importa(self):
-        self.chiediInfo(self.elabConInfo)
+        self.chiediInfo(self.elabConInfo, self.scelta)
 
-    def elabConInfo(self, nome_pa, trasportatore):
+    def elabConInfo(self, nome_pa, trasportatore, percentuale):
         file_path = filedialog.askopenfilename(
             title="Seleziona il file da importare",
             filetypes=[("File CSV", "*.csv"), ("Tutti i file", "*.*")]
@@ -105,7 +105,7 @@ class ElaboratoreView:
 
         try:
             # Chiama il metodo di elaborazione passando il file selezionato
-            df = self.AppController.elaborazione(nome_pa, trasportatore, self.scelta, file_path)
+            df = self.AppController.elaborazione(nome_pa, trasportatore, self.scelta, file_path, percentuale)
             # Svuota la tabella
             for row in self.table.get_children():
                 self.table.delete(row)
@@ -119,10 +119,9 @@ class ElaboratoreView:
         except Exception as e:
             messagebox.showerror("Errore", f"Errore durante l'elaborazione: {e}")
 
-        def debug_stampa_colonne(self, dfOut):
-            print("Colonne dfOut:", list(dfOut.columns))
+        
 
-    def chiediInfo(self, callback):
+    def chiediInfo(self, callback, scelta):
         nome_pa = simpledialog.askstring("Nome PA", "Inserisci il Nome PA:", parent=self.root)
         if not nome_pa:
             messagebox.showwarning("Attenzione", "Nome PA obbligatorio.")
@@ -141,6 +140,12 @@ class ElaboratoreView:
         selezione = tk.Toplevel(self.root)
         selezione.title("Seleziona Trasportatore")
         selezione.geometry("600x500")
+        # rendi la finestra modale per evitare interazioni con la root
+        try:
+            selezione.transient(self.root)
+            selezione.grab_set()
+        except Exception:
+            pass
 
         label = ttk.Label(selezione, text="Seleziona il trasportatore:")
         label.pack(pady=10)
@@ -150,6 +155,7 @@ class ElaboratoreView:
 
         combo = ttk.Combobox(selezione, values=trasportatori_nomi, textvariable=trasportatore_var, state="readonly")
         combo.pack(pady=10)
+        print(scelta)
 
         def conferma():
             selezionato_nome = combo.get()
@@ -157,9 +163,29 @@ class ElaboratoreView:
                 messagebox.showwarning("Attenzione", "Seleziona un trasportatore.")
                 return
             selezionato = next((t for t in trasportatori if t["nome"] == selezionato_nome), None)
+
+            # Se la scelta richiede una percentuale, chiedila ora
+            percentuale = 1
+            if scelta == "GECO":
+                try:
+                    needs_percentuale = messagebox.askyesno("Percentuale", "Hai bisogno di inserire la percentuale?", parent=selezione)
+                    if needs_percentuale:
+                        percentuale = simpledialog.askfloat(
+                            "Percentuale",
+                            "Inserisci la percentuale (es. 10 per 10%):",
+                            parent=selezione,
+                            minvalue=0,
+                            maxvalue=100
+                        )
+                        print(f"Percentuale inserita: {percentuale}")
+                except Exception as e:
+                    print(f"Errore richiesta percentuale: {e}")
             selezione.destroy()
             if selezionato:
-                callback(nome_pa, selezionato)
+                try:
+                    callback(nome_pa, selezionato, percentuale)
+                except TypeError:
+                    callback(nome_pa, selezionato)
             else:
                 messagebox.showerror("Errore", "Trasportatore non trovato.")
 

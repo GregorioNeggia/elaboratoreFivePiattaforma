@@ -11,7 +11,7 @@ class InfoView:
             self.window = tk.Toplevel()
         
         self.window.title("Guida - Elaboratore Five")
-        self.window.geometry("800x600")  # Increased size for better readability
+        self.window.geometry("1000x800")  # Increased size for better readability
         self.window.configure(bg="#002244")  # Slightly darker background for elegance
         self.window.resizable(True, True)  # Allow resizing for flexibility
 
@@ -55,12 +55,13 @@ class InfoView:
 
         # Pulsante chiudi
         close_button = tk.Button(main_frame, 
-                                 text="Chiudi Guida", 
-                                 font=("Helvetica", 14, "bold"),
-                                 bg="#FFA500", 
-                                 fg="white", 
-                                 activebackground="#CC5500",
-                                 command=self.window.destroy)
+                                text="Chiudi",
+                                font=("Arial", 18, "bold"),
+                                bg="#FF8C00",
+                                fg="#16213E",
+                                relief="raised",
+                                borderwidth=3,
+                                command=self.window.destroy)
         close_button.pack(pady=(0, 20))
 
 

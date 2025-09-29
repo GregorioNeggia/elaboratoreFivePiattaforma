@@ -9,6 +9,7 @@ from tkinter import ttk, simpledialog, messagebox
 import json
 from tkinter import filedialog
 from controllers.CSVController import CSVController
+import os
 
 class ElaboratoreView:
     def __init__(self, root, scelta, AppController):
@@ -16,37 +17,75 @@ class ElaboratoreView:
         self.scelta = scelta
         self.columns = OUTPUT_COLUMNS
         self.AppController = AppController
-
+        # Window
         self.root.title(f"ELABORATORE - {self.scelta}")
-        self.root.geometry("1000x500")
+        self.root.geometry("1400x900")
+        self.root.configure(bg="#1A1A2E")
 
-        # Frame principale
-        self.main_frame = ttk.Frame(self.root, padding="20")
+        # === Stili (coerenti con mainView) ===
+        style = ttk.Style()
+        try:
+            style.theme_use("clam")
+        except Exception:
+            pass
+        style.configure(
+            "BigOrange.TButton",
+            font=("Arial", 14, "bold"),
+            background="#FF8C00",
+            foreground="#16213E",
+            relief="raised",
+            borderwidth=3,
+            padding=8
+        )
+        style.map(
+            "BigOrange.TButton",
+            background=[("active", "#FF6B35")],
+            foreground=[("active", "#16213E")]
+        )
+        # Treeview heading style
+        try:
+            style.configure("Treeview.Heading", font=("Arial", 10, "bold"))
+            style.configure("Treeview", rowheight=24)
+        except Exception:
+            pass
+
+        # Frame principale (sfondo scuro)
+        self.main_frame = tk.Frame(self.root, bg="#16213E", padx=20, pady=20)
         self.main_frame.pack(fill=tk.BOTH, expand=True)
 
-        # Label titolo
-        self.title_label = ttk.Label(self.main_frame, text=f"ELABORATORE \n {self.scelta}", font=("Arial", 18, "bold"), anchor="center", justify="center")
-        self.title_label.pack(pady=(0, 20), fill=tk.X)
+        # Titolo
+        self.title_label = tk.Label(
+            self.main_frame,
+            text=f"ELABORATORE\n{self.scelta}",
+            font=("Arial", 24, "bold"),
+            fg="#FF8C00",
+            bg="#16213E",
+            justify="center"
+        )
+        self.title_label.pack(pady=(0, 16), fill=tk.X)
 
         # Frame bottoni
-        self.button_frame = ttk.Frame(self.main_frame)
-        self.button_frame.pack(pady=(0, 20))
+        self.button_frame = tk.Frame(self.main_frame, bg="#16213E")
+        self.button_frame.pack(pady=(0, 16))
 
-        self.import_btn = ttk.Button(self.button_frame, text="IMPORTA", command=self.importa)
+        self.import_btn = ttk.Button(self.button_frame, text="IMPORTA", command=self.importa, style="BigOrange.TButton")
         self.import_btn.grid(row=0, column=0, padx=10)
 
-        self.export_btn = ttk.Button(self.button_frame, text="ESPORTA", command=self.esporta)
+        self.export_btn = ttk.Button(self.button_frame, text="ESPORTA", command=self.esporta, style="BigOrange.TButton")
         self.export_btn.grid(row=0, column=1, padx=10)
 
         # Label tabella
-        self.table_label = ttk.Label(self.main_frame, text="ANTEPRIMA ESPORTAZIONE", font=("Arial", 12, "bold"))
-        self.table_label.pack(pady=(10, 5))
+        self.table_label = tk.Label(self.main_frame, text="ANTEPRIMA ESPORTAZIONE", font=("Arial", 12, "bold"), fg="#E0E0E0", bg="#16213E")
+        self.table_label.pack(pady=(10, 6))
 
         # Tabella (Treeview)
-        self.table = ttk.Treeview(self.main_frame, columns=self.columns, show="headings", height=10)
+        table_container = tk.Frame(self.main_frame, bg="#16213E")
+        table_container.pack(fill=tk.BOTH, expand=True)
+
+        self.table = ttk.Treeview(table_container, columns=self.columns, show="headings", height=12)
         for col in self.columns:
             self.table.heading(col, text=col)
-            self.table.column(col, width=100, anchor=tk.CENTER)
+            self.table.column(col, width=120, anchor=tk.CENTER)
         self.table.pack(fill=tk.BOTH, expand=True)
 
 
@@ -90,7 +129,10 @@ class ElaboratoreView:
             return
 
         try:
-            with open("src/utils/Db/Trasportatori.json", encoding="utf-8") as f:
+            base_dir = os.path.dirname(os.path.abspath(__file__))
+            trasportatori_path = os.path.join(base_dir, "..", "utils", "Db", "Trasportatori.json")
+            trasportatori_path = os.path.normpath(trasportatori_path)
+            with open(trasportatori_path, encoding="utf-8") as f:
                 trasportatori = json.load(f)
         except Exception as e:
             messagebox.showerror("Errore", f"Errore caricamento trasportatori: {e}")
@@ -98,7 +140,7 @@ class ElaboratoreView:
 
         selezione = tk.Toplevel(self.root)
         selezione.title("Seleziona Trasportatore")
-        selezione.geometry("400x300")
+        selezione.geometry("600x500")
 
         label = ttk.Label(selezione, text="Seleziona il trasportatore:")
         label.pack(pady=10)

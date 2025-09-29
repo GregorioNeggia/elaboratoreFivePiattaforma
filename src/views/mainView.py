@@ -11,7 +11,8 @@ class MainView:
         self.root.configure(bg="#1A1A2E")  # Sfondo generale scuro
 
         # === Caricamento logo ===
-        logo_path = "src/utils/five_consulting_logo.png"
+        logo_path = os.path.join(os.path.dirname(__file__), "..", "utils", "five_consulting_logo.png")
+        logo_path = os.path.abspath(logo_path)
         self.logo = None
         if os.path.exists(logo_path):
             try:
@@ -125,7 +126,8 @@ class MainView:
         self.AppController.apriInfo()
 
     def apri_elaboratore(self, scelta):
-        self.AppController.apri_elaboratore(scelta)
+        # Passo la root principale al controller così può gestire la finestra (nascondere/mostrare)
+        self.AppController.apri_elaboratore(scelta, self.root)
 
 
         

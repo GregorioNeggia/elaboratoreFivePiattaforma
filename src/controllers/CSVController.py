@@ -65,11 +65,14 @@ class CSVController:
 
     """METODI PER GECO"""
     def upload_csvGECO(self,path):
+        colonne_da_leggere = [1,3,5,6,8,9,10]
         try:
             with open(path, mode='r', encoding='utf-8') as file:
-                csv_reader = csv.reader(file)
-                data = [row for row in csv_reader]
-                return pd.DataFrame(data[1:], columns=data[0])
+                df = pd.read_csv(file, usecols=colonne_da_leggere, sep=';', header=1)
+                # Rimuovi righe dove la quarta colonna contiene la parola "totale" (case-insensitive)
+                df = df[~df.iloc[:, 3].astype(str).str.strip().str.lower().str.contains('totale', na=False)].reset_index(drop=True)
+                df['CDR'] = df.iloc[:, 0].apply(lambda x: 1 if "CDR" in str(x) else 0)
+                return df
         except FileNotFoundError:
             print(f"Errore: Il file '{path}' non è stato trovato.")
         except pd.errors.EmptyDataError:
@@ -78,11 +81,6 @@ class CSVController:
             print(f"Errore imprevisto: {e}")
 
     
-
-
-
-
-
 
     """METODI PER APRICA"""
     def upload_csvAPRICA(path):
@@ -119,6 +117,12 @@ class CSVController:
     """METODI PER ALTRO"""
     def upload_csvALTRO(path):
         pass
+
+
+
+
+
+
 
 
         """METODO EXPORT CSV"""

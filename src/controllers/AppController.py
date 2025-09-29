@@ -15,18 +15,40 @@ class AppController:
 
 
 
-    def apri_elaboratore(self, scelta):
+    def apri_elaboratore(self, scelta, root):
+        """
+        Apre la finestra di elaborazione come Toplevel, nascondendo la root principale.
+        Quando il Toplevel viene chiuso, la root viene mostrata di nuovo.
+        """
         from tkinter import Toplevel
         from views.ElabView import ElaboratoreView
 
+        # Nascondi la finestra principale
+        try:
+            root.withdraw()
+        except Exception:
+            pass
+
         # Crea una nuova finestra per l'elaboratore
-        elab_window = Toplevel()
+        elab_window = Toplevel(root)
         elab_window.title(f"Elaboratore - {scelta}")
         elab_window.geometry("800x600")
 
         # Crea la vista dell'elaboratore passando la scelta e il controller
         elab_view = ElaboratoreView(elab_window, scelta, self)
-        elab_window.mainloop()
+
+        # Quando l'utente chiude la finestra, mostra di nuovo la root
+        def on_close():
+            try:
+                elab_window.destroy()
+            except Exception:
+                pass
+            try:
+                root.deiconify()
+            except Exception:
+                pass
+
+        elab_window.protocol("WM_DELETE_WINDOW", on_close)
 
     def apriInfo(self):
         from views.InfoView import InfoView

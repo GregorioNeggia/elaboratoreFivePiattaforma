@@ -92,7 +92,7 @@ class ElabController:
     
                         if int(float(cdr_val)) == 1:
                             dfOut.loc[index, "Produttore rifiuto"] = "Comune di " + nomePa + ("(CDR)")
-                            dfOut.loc[index, "kg"] = row.iloc[8] * (percentuale if percentuale is not None else 1)
+                            dfOut.loc[index, "kg"] = float(f"{row.iloc[8] * (percentuale if percentuale is not None else 1):.3f}")
                         
                     else:
                         # valore CDR mancante: default a (M)
@@ -108,7 +108,7 @@ class ElabController:
                 dfOut = dfOut.infer_objects(copy=False)
             except Exception:
                 # Fallback semplice
-                dfOut = dfOut.fillna("")
+                dfOut = dfOut.fillna("").infer_objects(copy=False)
             return dfOut
 
         except Exception as e:

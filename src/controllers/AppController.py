@@ -60,7 +60,7 @@ class AppController:
 
 
 
-    def elaborazione(self, nomePa, trasportatore, scelta, pathIn, percentuale=None):
+    def elaborazione(self, nomePa, trasportatore, scelta, pathIn, percentuale):
         
         elab_config = self.config["ELABORATORE_CONFIG"].get(scelta)
         if not elab_config:
@@ -74,7 +74,7 @@ class AppController:
 
         try:
             df = metodoImport(pathIn)
-            dfOut = metodoElab(df, self.columns, nomePa, trasportatore, percentuale if self.config.get("percentuale") is not None else None)
+            dfOut = metodoElab(df, self.columns, nomePa, trasportatore, percentuale)
             return dfOut
 
         except AttributeError as e:

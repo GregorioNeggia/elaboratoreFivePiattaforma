@@ -76,7 +76,24 @@ class CSVController:
                 df = df[non_empty & not_totale].reset_index(drop=True)
 
                 df['CDR'] = df.iloc[:, 0].apply(lambda x: 1 if "CDR" in str(x) else 0)
-                return df
+
+                def convert_kg(val):
+                    try:
+                    # Normalizza separatore decimale
+                        s = str(val).strip().replace(',', '.')
+                        num = float(s)
+                    # Se ha parte frazionaria, moltiplica per 1000
+                        if num % 1 != 0:
+                            return num * 1000
+                        else:
+                            return num
+                    except (ValueError, TypeError):
+                    # Se non convertibile, restituisce 0.0
+                            return 0.0
+                    
+                df['KG'] = df.iloc[:, 5].apply(convert_kg)
+
+            return df
             
         except FileNotFoundError:
             print(f"Errore: Il file '{path}' non è stato trovato.")
@@ -96,6 +113,14 @@ class CSVController:
 
 
     """METODI PER VCS"""
+
+    def isDecimal(value):
+        try:
+            float(value)
+            return True
+        except ValueError:
+            return False
+
     def uploadCSV_VCS(self, path):
         
         colonne_da_leggere = [1,5,6,8,9,10,12]
@@ -107,7 +132,7 @@ class CSVController:
 
                 df['CDR'] = df.iloc[:, 0].apply(lambda x: 1 if "CENTRO RACCOLTA" in str(x) else 0)
 
-                return df
+            return df
         except FileNotFoundError:
             print(f"Errore: Il file '{path}' non è stato trovato.")
         except pd.errors.EmptyDataError:

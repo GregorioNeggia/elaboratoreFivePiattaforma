@@ -6,6 +6,7 @@ import pandas as pd
 
 class ElabController:
 
+
     
 
     def __init__(self):
@@ -13,8 +14,13 @@ class ElabController:
 
 
 
-
-
+    @staticmethod
+    def isDecimal(value):
+        try:
+            float(value)
+            return True
+        except ValueError:
+            return False
 
 
 
@@ -23,7 +29,7 @@ class ElabController:
 
 
     """METODI PER VCS"""
-    def elabVCS(self, df, columns, nomePa, trasportatore):
+    def elabVCS(self, df, columns, nomePa, trasportatore, percentuale):
         try:
             dfOut = pd.DataFrame(index=range(len(df)), columns=columns)
             for index, row in df.iterrows():
@@ -32,7 +38,7 @@ class ElabController:
                 dfOut.loc[index, "nome DEST"] = row.iloc[1]
                 dfOut.loc[index, "nome TRASP"] = trasportatore["nome"]
                 dfOut.loc[index, "numero_formulario"] = row.iloc[6]
-                dfOut.loc[index, "data_raccolta"] = row.iloc[3]
+                dfOut.loc[index, "data_raccolta"] = row.iloc[5]
                 dfOut.loc[index, "kg"] = row.iloc[4]
                 dfOut.loc[index, "Cod.Smalt."] = row.iloc[3]
 
@@ -60,7 +66,8 @@ class ElabController:
 
     """METODI GECO"""
 
-    def elabGECO(self, df, columns, nomePa, trasportatore, percentuale=None):
+    def elabGECO(self, df, columns, nomePa, trasportatore, percentuale):
+        
         try:
             dfOut = pd.DataFrame(index=range(len(df)), columns=columns)
             for index, row in df.iterrows():
@@ -70,29 +77,21 @@ class ElabController:
                 dfOut.loc[index, "nome TRASP"] = trasportatore["nome"]
                 dfOut.loc[index, "numero_formulario"] = row.iloc[3]
                 dfOut.loc[index, "data_raccolta"] = row.iloc[2]
-
-                # Calcolo kg: rendilo robusto se percentuale è None o valori non numerici
-                try:
-                    pct = 100.0 if percentuale is None else float(percentuale)
-                except Exception:
-                    pct = 100.0
-
-                try:
-                    raw_kg = row.iloc[6]
-                    kg_val = float(raw_kg) if pd.notna(raw_kg) and str(raw_kg).strip() != "" else 0.0
-                except Exception:
-                    kg_val = 0.0
-
-                dfOut.loc[index, "kg"] = kg_val * (pct / 100.0)
                 dfOut.loc[index, "Cod.Smalt."] = row.iloc[5]
                 # Gestione Produttore rifiuto basata su CDR per riga
+
+                
                 try:
                     cdr_val = row.get('CDR', None)
                     if cdr_val is not None and str(cdr_val).strip() != 'nan':
+
+                        dfOut.loc[index, "Produttore rifiuto"] = "Comune di " + nomePa + ("(M)")
+                        dfOut.loc[index, "kg"] = row.iloc[6]
+    
                         if int(float(cdr_val)) == 1:
                             dfOut.loc[index, "Produttore rifiuto"] = "Comune di " + nomePa + ("(CDR)")
-                        else:
-                            dfOut.loc[index, "Produttore rifiuto"] = "Comune di " + nomePa + ("(M)")
+                            dfOut.loc[index, "kg"] = row.iloc[6] * (percentuale if percentuale is not None else 1)
+                        
                     else:
                         # valore CDR mancante: default a (M)
                         dfOut.loc[index, "Produttore rifiuto"] = "Comune di " + nomePa + ("(M)")
@@ -113,4 +112,8 @@ class ElabController:
         except Exception as e:
             print(f"Errore imprevisto durante l'elaborazione G.ECO: {e}")
             return None
+        
+
+
+        
         

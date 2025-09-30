@@ -177,7 +177,9 @@ class ElaboratoreView:
                             minvalue=0,
                             maxvalue=100
                         )
-                        print(f"Percentuale inserita: {percentuale}")
+                    else: 
+                        percentuale = 1
+                        print(f"Percentuale: {percentuale}")
                 except Exception as e:
                     print(f"Errore richiesta percentuale: {e}")
             selezione.destroy()

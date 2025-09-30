@@ -72,7 +72,7 @@ class CSVController:
                 # Rimuovi righe dove la quarta colonna è vuota o contiene la parola "totale" (case-insensitive)
                 col4 = df.iloc[:, 3]
                 non_empty = col4.notna() & (col4.astype(str).str.strip() != '')
-                not_totale = ~col4.astype(str).str.lower().str.contains('Totale', na=False)
+                not_totale = ~col4.astype(str).str.contains('Totale', na=False)
                 df = df[non_empty & not_totale].reset_index(drop=True)
 
                 df['CDR'] = df.iloc[:, 0].apply(lambda x: 1 if "CDR" in str(x) else 0)
@@ -88,10 +88,10 @@ class CSVController:
                         else:
                             return num
                     except (ValueError, TypeError):
-                    # Se non convertibile, restituisce 0.0
-                            return 0.0
+                        print(f"Valore non convertibile in float: {val}")
+                        return 0
                     
-                df['KG'] = df.iloc[:, 5].apply(convert_kg)
+                df['KG'] = df.iloc[:, 6].apply(convert_kg)
 
             return df
             

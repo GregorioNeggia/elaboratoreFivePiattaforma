@@ -67,6 +67,8 @@ class ElabController:
     """METODI GECO"""
 
     def elabGECO(self, df, columns, nomePa, trasportatore, percentuale):
+
+        percentuale = percentuale / 100 if percentuale != 1 else percentuale
         
         try:
             dfOut = pd.DataFrame(index=range(len(df)), columns=columns)
@@ -86,11 +88,11 @@ class ElabController:
                     if cdr_val is not None and str(cdr_val).strip() != 'nan':
 
                         dfOut.loc[index, "Produttore rifiuto"] = "Comune di " + nomePa + ("(M)")
-                        dfOut.loc[index, "kg"] = row.iloc[6]
+                        dfOut.loc[index, "kg"] = row.iloc[8]
     
                         if int(float(cdr_val)) == 1:
                             dfOut.loc[index, "Produttore rifiuto"] = "Comune di " + nomePa + ("(CDR)")
-                            dfOut.loc[index, "kg"] = row.iloc[6] * (percentuale if percentuale is not None else 1)
+                            dfOut.loc[index, "kg"] = row.iloc[8] * (percentuale if percentuale is not None else 1)
                         
                     else:
                         # valore CDR mancante: default a (M)

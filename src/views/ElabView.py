@@ -1,300 +1,478 @@
-
-from utils.config.configuration import OUTPUT_COLUMNS
-
-
-
-
-import tkinter as tk
-from tkinter import ttk, simpledialog, messagebox
+# views/elaboratore_view.py
 import json
-from tkinter import filedialog
-from controllers.CSVController import CSVController
 import os
+import tkinter as tk
+from tkinter import ttk, filedialog, messagebox
+
+from utils.ui.theme_colors import ThemeColors
+from utils.config.configuration import OUTPUT_COLUMNS
+from controllers.CSVController import CSVController
+
 
 class ElaboratoreView:
-    def __init__(self, root, scelta, AppController):
-        self.root = root
-        self.scelta = scelta
-        self.columns = OUTPUT_COLUMNS
-        self.AppController = AppController
-        # Window
-        self.root.title(f"ELABORATORE - {self.scelta}")
-        self.root.geometry("1400x900")
-        self.root.configure(bg="#1A1A2E")
+    """Schermata di elaborazione CSV con dialog moderni."""
 
-        # === Stili (coerenti con mainView) ===
+    def __init__(self, root, scelta, app_controller):
+        self.root           = root
+        self.scelta         = scelta
+        self.app_controller = app_controller
+        self.columns        = OUTPUT_COLUMNS
+
+        self._init_window()
+        self._setup_style()
+        self._build_layout()
+
+    def _init_window(self):
+        self.root.title(f"ELABORATORE – {self.scelta}")
+        self.root.geometry("1400x900")
+        self.root.configure(bg=ThemeColors.BACKGROUND)
+
+    def _setup_style(self):
         style = ttk.Style()
         try:
             style.theme_use("clam")
         except Exception:
             pass
+
+        # ═══ CONFIGURAZIONE GLOBALE COMBOBOX PER LEGGIBILITÀ ═══
+        # Imposta le opzioni globali per tutti i Combobox dropdown
+        self.root.tk.call("option", "add", "*TCombobox*Listbox.background", "#0F1A2E")
+        self.root.tk.call("option", "add", "*TCombobox*Listbox.foreground", ThemeColors.WHITE)
+        self.root.tk.call("option", "add", "*TCombobox*Listbox.selectBackground", ThemeColors.ORANGE)
+        self.root.tk.call("option", "add", "*TCombobox*Listbox.selectForeground", ThemeColors.MAIN_BG)
+        self.root.tk.call("option", "add", "*TCombobox*Listbox.font", "Arial 12 normal")
+
         style.configure(
             "BigOrange.TButton",
             font=("Arial", 14, "bold"),
-            background="#FF8C00",
-            foreground="#16213E",
+            background=ThemeColors.ORANGE,
+            foreground=ThemeColors.MAIN_BG,
             relief="raised",
             borderwidth=3,
-            padding=8
+            padding=8,
         )
         style.map(
             "BigOrange.TButton",
-            background=[("active", "#FF6B35")],
-            foreground=[("active", "#16213E")]
+            background=[("active", ThemeColors.ORANGE_ACTIVE)],
+            foreground=[("active", ThemeColors.MAIN_BG)],
         )
-        # Treeview heading style
-        try:
-            style.configure("Treeview.Heading", font=("Arial", 10, "bold"))
-            style.configure("Treeview", rowheight=24)
-        except Exception:
-            pass
 
-        # Frame principale (sfondo scuro)
-        self.main_frame = tk.Frame(self.root, bg="#16213E", padx=20, pady=20)
-        self.main_frame.pack(fill=tk.BOTH, expand=True)
+        style.configure("Treeview.Heading", font=("Arial", 10, "bold"))
+        style.configure("Treeview", rowheight=24)
 
-        # Titolo
-        self.title_label = tk.Label(
-            self.main_frame,
+    def _build_layout(self):
+        main = tk.Frame(self.root, bg=ThemeColors.MAIN_BG, padx=20, pady=20)
+        main.pack(fill=tk.BOTH, expand=True)
+
+        tk.Label(
+            main,
             text=f"ELABORATORE\n{self.scelta}",
             font=("Arial", 24, "bold"),
-            fg="#FF8C00",
-            bg="#16213E",
-            justify="center"
+            fg=ThemeColors.ORANGE,
+            bg=ThemeColors.MAIN_BG,
+            justify="center",
+        ).pack(pady=(0, 16), fill=tk.X)
+
+        btn_frame = tk.Frame(main, bg=ThemeColors.MAIN_BG)
+        btn_frame.pack(pady=(0, 16))
+
+        ttk.Button(btn_frame, text="IMPORTA", style="BigOrange.TButton",
+                   command=self.importa).grid(row=0, column=0, padx=10)
+        ttk.Button(btn_frame, text="ESPORTA", style="BigOrange.TButton",
+                   command=self.esporta).grid(row=0, column=1, padx=10)
+        ttk.Button(btn_frame, text="REFRESH", style="BigOrange.TButton",
+                   command=self.refresh).grid(row=0, column=2, padx=10)
+
+        tk.Label(
+            main,
+            text="ANTEPRIMA ESPORTAZIONE",
+            font=("Arial", 12, "bold"),
+            fg=ThemeColors.LIGHT_GRAY,
+            bg=ThemeColors.MAIN_BG,
+        ).pack(pady=(10, 6))
+
+        container = tk.Frame(main, bg=ThemeColors.MAIN_BG)
+        container.pack(fill=tk.BOTH, expand=True)
+
+        self.table = ttk.Treeview(
+            container, columns=self.columns, show="headings", height=12
         )
-        self.title_label.pack(pady=(0, 16), fill=tk.X)
-
-        # Frame bottoni
-        self.button_frame = tk.Frame(self.main_frame, bg="#16213E")
-        self.button_frame.pack(pady=(0, 16))
-
-        self.import_btn = ttk.Button(self.button_frame, text="IMPORTA", command=self.importa, style="BigOrange.TButton")
-        self.import_btn.grid(row=0, column=0, padx=10)
-
-        self.export_btn = ttk.Button(self.button_frame, text="ESPORTA", command=self.esporta, style="BigOrange.TButton")
-        self.export_btn.grid(row=0, column=1, padx=10)
-
-        # Label tabella
-        self.table_label = tk.Label(self.main_frame, text="ANTEPRIMA ESPORTAZIONE", font=("Arial", 12, "bold"), fg="#E0E0E0", bg="#16213E")
-        self.table_label.pack(pady=(10, 6))
-
-        # Tabella (Treeview)
-        table_container = tk.Frame(self.main_frame, bg="#16213E")
-        table_container.pack(fill=tk.BOTH, expand=True)
-
-        self.table = ttk.Treeview(table_container, columns=self.columns, show="headings", height=12)
         for col in self.columns:
             self.table.heading(col, text=col)
             self.table.column(col, width=120, anchor=tk.CENTER)
         self.table.pack(fill=tk.BOTH, expand=True)
 
-
-
-
     def importa(self):
-        self.chiediInfo(self.elabConInfo, self.scelta)
+        self._dialog_flow(self._esegui_elaborazione, self.scelta)
 
-    def elabConInfo(self, nome_pa, trasportatore, percentuale):
+    def esporta(self):
+        CSVController.esporta(self.table)
+
+    def refresh(self):
+        """Svuota tabella e rilancia importazione."""
+        self.table.delete(*self.table.get_children())
+        self.importa()
+
+    def _esegui_elaborazione(self, nome_pa, trasportatore, percentuale):
         file_path = filedialog.askopenfilename(
             title="Seleziona il file da importare",
-            filetypes=[("File CSV", "*.csv"), ("Tutti i file", "*.*")]
+            filetypes=[("File CSV", "*.csv"), ("Tutti i file", "*.*")],
         )
         if not file_path:
             messagebox.showwarning("Attenzione", "Nessun file selezionato.")
             return
 
         try:
-            # Chiama il metodo di elaborazione passando il file selezionato
-            df = self.AppController.elaborazione(nome_pa, trasportatore, self.scelta, file_path, percentuale)
-            # Svuota la tabella
-            for row in self.table.get_children():
-                self.table.delete(row)
-            # Inserisci nuovi dati (assumendo df è un DataFrame)
+            df = self.app_controller.elaborazione(
+                nome_pa, trasportatore, self.scelta, file_path, percentuale
+            )
+            self.table.delete(*self.table.get_children())
             if df is not None:
-                for _, riga in df.iterrows():
-                    values = [riga.get(col, "") if hasattr(riga, 'get') else riga[col] for col in self.columns]
-                    self.table.insert("", tk.END, values=values)
+                for _, row in df.iterrows():
+                    self.table.insert(
+                        "", tk.END, values=[row.get(col, "") for col in self.columns]
+                    )
             else:
                 messagebox.showwarning("Attenzione", "Nessun dato elaborato.")
-        except Exception as e:
-            messagebox.showerror("Errore", f"Errore durante l'elaborazione: {e}")
+        except Exception as exc:
+            messagebox.showerror("Errore", f"Errore durante l'elaborazione:\n{exc}")
 
-        
-
-    def chiediInfo(self, callback, scelta):
-        # Palette coerente con ElaboratoreView
-        BG_ROOT = "#1A1A2E"
-        BG_FRAME = "#16213E"
-        FG_TEXT = "#E0E0E0"
-        ACCENT = "#FF8C00"
-        ACCENT_ACTIVE = "#FF6B35"
-        INPUT_BG = "#0F1A2E"
-        INPUT_FG = "#EAEAEA"
-        PRIMARY = "#1F6FB2"
-
-        # === DIALOG NOME PA ===
-        nome_pa_result = [None]  # lista per catturare il valore nel closure
-
-        dialog_pa = tk.Toplevel(self.root)
-        dialog_pa.title("Nome PA")
-        dialog_pa.geometry("420x200")
-        dialog_pa.configure(bg=BG_FRAME)
-        dialog_pa.transient(self.root)
-        dialog_pa.grab_set()
-
-        frame_pa = tk.Frame(dialog_pa, bg=BG_FRAME)
-        frame_pa.pack(fill="both", expand=True, padx=20, pady=20)
-
-        tk.Label(frame_pa, text="Inserisci il Nome PA:", font=("Arial", 11), fg=FG_TEXT, bg=BG_FRAME).pack(anchor="w", pady=(0, 10))
-
-        entry_pa = tk.Entry(frame_pa, font=("Arial", 11), bg=INPUT_BG, fg=INPUT_FG, insertbackground=INPUT_FG, relief="flat", borderwidth=2)
-        entry_pa.pack(fill="x", ipady=6)
-        entry_pa.focus_set()
-
-        footer_pa = tk.Frame(frame_pa, bg=BG_FRAME)
-        footer_pa.pack(fill="x", pady=(20, 0))
-        spacer_pa = tk.Frame(footer_pa, bg=BG_FRAME)
-        spacer_pa.pack(side="left", expand=True)
-
-        def conferma_pa():
-            val = entry_pa.get().strip()
-            if not val:
-                messagebox.showwarning("Attenzione", "Nome PA obbligatorio.", parent=dialog_pa)
-                return
-            nome_pa_result[0] = val
-            dialog_pa.destroy()
-
-        def annulla_pa():
-            dialog_pa.destroy()
-
-        btn_annulla_pa = tk.Button(footer_pa, text="Annulla", font=("Arial", 10, "bold"), bg=BG_FRAME, fg=FG_TEXT, activebackground=BG_FRAME, activeforeground=ACCENT, relief="flat", command=annulla_pa)
-        btn_annulla_pa.pack(side="right", padx=(0, 10))
-
-        btn_ok_pa = tk.Button(footer_pa, text="Conferma", font=("Arial", 10, "bold"), bg=ACCENT, fg="#16213E", activebackground=ACCENT_ACTIVE, activeforeground="#16213E", relief="raised", borderwidth=2, command=conferma_pa)
-        btn_ok_pa.pack(side="right", ipadx=10, ipady=4)
-
-        entry_pa.bind("<Return>", lambda e: conferma_pa())
-        dialog_pa.wait_window()
-
-        nome_pa = nome_pa_result[0]
+    def _dialog_flow(self, callback, scelta):
+        nome_pa = self._dialog_nome_pa()
         if not nome_pa:
             return
 
-        # === CARICA TRASPORTATORI ===
         try:
-            base_dir = os.path.dirname(os.path.abspath(__file__))
-            trasportatori_path = os.path.normpath(os.path.join(base_dir, "..", "utils", "Db", "Trasportatori.json"))
-            with open(trasportatori_path, encoding="utf-8") as f:
-                trasportatori = json.load(f)
-        except Exception as e:
-            messagebox.showerror("Errore", f"Errore caricamento trasportatori: {e}", parent=self.root)
+            trasportatori = self._carica_trasportatori()
+        except Exception as exc:
+            messagebox.showerror("Errore", f"Errore caricamento trasportatori:\n{exc}")
             return
 
-        # === DIALOG TRASPORTATORE ===
-        selezione = tk.Toplevel(self.root)
-        selezione.title("Seleziona Trasportatore")
-        selezione.geometry("500x400")
-        selezione.configure(bg=BG_FRAME)
-        selezione.transient(self.root)
-        selezione.grab_set()
+        result = self._dialog_trasportatore(scelta, trasportatori)
+        if not result:
+            return
+        trasportatore, percentuale = result
+        callback(nome_pa, trasportatore, percentuale)
 
-        style = ttk.Style(selezione)
-        try:
-            style.theme_use("clam")
-        except:
-            pass
+    def _dialog_nome_pa(self):
+        dlg = tk.Toplevel(self.root)
+        dlg.title("Nome PA")
+        dlg.geometry("480x220")
+        dlg.configure(bg=ThemeColors.MAIN_BG)
+        dlg.transient(self.root)
+        dlg.grab_set()
+        dlg.resizable(False, False)
 
-        # Stili ttk
-        style.configure("Dark.TCombobox", fieldbackground=INPUT_BG, background=INPUT_BG, foreground=INPUT_FG, arrowcolor=INPUT_FG, bordercolor=PRIMARY, lightcolor=PRIMARY, darkcolor=BG_FRAME)
-        style.map("Dark.TCombobox", fieldbackground=[("readonly", INPUT_BG)], foreground=[("readonly", INPUT_FG)], bordercolor=[("focus", PRIMARY)])
-        
-        selezione.option_add("*TCombobox*Listbox*Background", BG_FRAME)
-        selezione.option_add("*TCombobox*Listbox*Foreground", FG_TEXT)
-        selezione.option_add("*TCombobox*Listbox*selectBackground", ACCENT)
-        selezione.option_add("*TCombobox*Listbox*selectForeground", "#16213E")
+        # Centra finestra
+        dlg.update_idletasks()
+        x = self.root.winfo_x() + (self.root.winfo_width() // 2) - (dlg.winfo_width() // 2)
+        y = self.root.winfo_y() + (self.root.winfo_height() // 2) - (dlg.winfo_height() // 2)
+        dlg.geometry(f"+{x}+{y}")
 
-        container = tk.Frame(selezione, bg=BG_FRAME)
-        container.pack(fill="both", expand=True, padx=20, pady=20)
+        main = tk.Frame(dlg, bg=ThemeColors.MAIN_BG)
+        main.pack(fill="both", expand=True, padx=30, pady=30)
 
-        tk.Label(container, text="Seleziona il trasportatore", font=("Arial", 13, "bold"), fg=ACCENT, bg=BG_FRAME).pack(anchor="w")
+        tk.Label(
+            main,
+            text="Inserisci Nome PA",
+            font=("Arial", 16, "bold"),
+            fg=ThemeColors.ORANGE,
+            bg=ThemeColors.MAIN_BG,
+        ).pack(anchor="w", pady=(0, 20))
 
-        tk.Label(container, text="Trasportatore", font=("Arial", 10), fg=FG_TEXT, bg=BG_FRAME).pack(anchor="w", pady=(16, 6))
-        trasportatori_nomi = [t.get("nome", "") for t in trasportatori]
-        trasportatore_var = tk.StringVar(value=trasportatori_nomi[0] if trasportatori_nomi else "")
-        combo = ttk.Combobox(container, values=trasportatori_nomi, textvariable=trasportatore_var, state="readonly", style="Dark.TCombobox")
-        combo.pack(fill="x")
+        entry_var = tk.StringVar()
+        entry = tk.Entry(
+            main,
+            textvariable=entry_var,
+            font=("Arial", 13),
+            bg="#0F1A2E",
+            fg=ThemeColors.WHITE,
+            insertbackground=ThemeColors.ORANGE,
+            relief="flat",
+            borderwidth=0,
+        )
+        entry.pack(fill="x", ipady=10)
+        entry.focus_set()
 
-        # Campo percentuale solo per GECO
-        percent_var = tk.StringVar(value="")
-        percent_entry = None
-
-        def validate_percent(newval):
-            if newval.strip() == "":
-                return True
-            try:
-                v = float(newval.replace(",", "."))
-                return 0 <= v <= 100
-            except:
-                return False
-
-        if scelta == "GECO":
-            tk.Label(container, text="Percentuale (0–100)", font=("Arial", 10), fg=FG_TEXT, bg=BG_FRAME).pack(anchor="w", pady=(16, 6))
-            vcmd = (selezione.register(validate_percent), "%P")
-            percent_entry = tk.Entry(container, textvariable=percent_var, font=("Arial", 11), bg=INPUT_BG, fg=INPUT_FG, insertbackground=INPUT_FG, relief="flat", validate="key", validatecommand=vcmd)
-            percent_entry.insert(0, "10")
-            percent_entry.pack(fill="x", ipady=6)
-            tk.Label(container, text="Lascia vuoto per 1 (nessuna variazione)", font=("Arial", 9), fg="#999", bg=BG_FRAME).pack(anchor="w", pady=(6, 0))
-
-        footer = tk.Frame(container, bg=BG_FRAME)
-        footer.pack(fill="x", pady=(20, 0))
-        spacer = tk.Frame(footer, bg=BG_FRAME)
-        spacer.pack(side="left", expand=True)
+        footer = tk.Frame(main, bg=ThemeColors.MAIN_BG)
+        footer.pack(fill="x", pady=(30, 0))
 
         def conferma():
-            selezionato_nome = combo.get().strip()
-            if not selezionato_nome:
-                messagebox.showwarning("Attenzione", "Seleziona un trasportatore.", parent=selezione)
+            val = entry_var.get().strip()
+            if not val:
+                messagebox.showwarning("Attenzione", "Nome PA obbligatorio.", parent=dlg)
                 return
-            selezionato = next((t for t in trasportatori if t.get("nome", "") == selezionato_nome), None)
-            if not selezionato:
-                messagebox.showerror("Errore", "Trasportatore non trovato.", parent=selezione)
-                return
-
-            percentuale = 1
-            if scelta == "GECO":
-                txt = percent_var.get().strip()
-                if txt:
-                    try:
-                        val = float(txt.replace(",", "."))
-                        if not (0 <= val <= 100):
-                            raise ValueError
-                        percentuale = val
-                    except:
-                        messagebox.showerror("Errore", "Percentuale non valida (0-100).", parent=selezione)
-                        return
-
-            selezione.destroy()
-            try:
-                callback(nome_pa, selezionato, percentuale)
-            except TypeError:
-                callback(nome_pa, selezionato)
+            dlg.result = val
+            dlg.destroy()
 
         def annulla():
-            selezione.destroy()
+            dlg.result = None
+            dlg.destroy()
 
-        btn_annulla = tk.Button(footer, text="Annulla", font=("Arial", 10, "bold"), bg=BG_FRAME, fg=FG_TEXT, activebackground=BG_FRAME, activeforeground=ACCENT, relief="flat", command=annulla)
-        btn_annulla.pack(side="right", padx=(0, 10))
+        tk.Button(
+            footer,
+            text="Annulla",
+            font=("Arial", 11, "bold"),
+            bg=ThemeColors.ORANGE,
+            fg=ThemeColors.MAIN_BG,
+            activebackground=ThemeColors.ORANGE_ACTIVE,
+            activeforeground=ThemeColors.MAIN_BG,
+            relief="flat",
+            borderwidth=0,
+            command=annulla,
+        ).pack(side="right", padx=(10, 0), ipadx=12, ipady=6)
 
-        btn_ok = tk.Button(footer, text="Conferma", font=("Arial", 10, "bold"), bg=ACCENT, fg="#16213E", activebackground=ACCENT_ACTIVE, activeforeground="#16213E", relief="raised", borderwidth=2, command=conferma)
-        btn_ok.pack(side="right", ipadx=10, ipady=4)
+        tk.Button(
+            footer,
+            text="Conferma",
+            font=("Arial", 11, "bold"),
+            bg=ThemeColors.ORANGE,
+            fg=ThemeColors.MAIN_BG,
+            activebackground=ThemeColors.ORANGE_ACTIVE,
+            activeforeground=ThemeColors.MAIN_BG,
+            relief="flat",
+            borderwidth=0,
+            command=conferma,
+        ).pack(side="right", ipadx=16, ipady=6)
 
-        if scelta == "GECO" and percent_entry:
-            percent_entry.focus_set()
-        else:
-            combo.focus_set()
+        entry.bind("<Return>", lambda e: conferma())
+        entry.bind("<Escape>", lambda e: annulla())
 
-    def esporta(self):
-        CSVController.esporta(self.table)
+        dlg.wait_window()
+        return getattr(dlg, "result", None)
+
+    def _dialog_trasportatore(self, scelta, trasportatori):
+        dlg = tk.Toplevel(self.root)
+        dlg.title("Seleziona Trasportatore")
+        dlg.geometry("560x480")
+        dlg.configure(bg=ThemeColors.MAIN_BG)
+        dlg.transient(self.root)
+        dlg.grab_set()
+        dlg.resizable(False, False)
+
+        dlg.update_idletasks()
+        x = self.root.winfo_x() + (self.root.winfo_width() // 2) - (dlg.winfo_width() // 2)
+        y = self.root.winfo_y() + (self.root.winfo_height() // 2) - (dlg.winfo_height() // 2)
+        dlg.geometry(f"+{x}+{y}")
+
+        # ═══ CONFIGURAZIONE MIGLIORATA PER LEGGIBILITÀ DROPDOWN ═══
+        # Configurazione globale per tutti i dropdown Combobox
+        dlg.tk.call("option", "add", "*TCombobox*Listbox.background", "#0F1A2E")
+        dlg.tk.call("option", "add", "*TCombobox*Listbox.foreground", ThemeColors.WHITE)
+        dlg.tk.call("option", "add", "*TCombobox*Listbox.selectBackground", ThemeColors.ORANGE)
+        dlg.tk.call("option", "add", "*TCombobox*Listbox.selectForeground", ThemeColors.MAIN_BG)
+        dlg.tk.call("option", "add", "*TCombobox*Listbox.font", "Arial 12")
+        dlg.tk.call("option", "add", "*TCombobox*Listbox.borderWidth", "0")
+        dlg.tk.call("option", "add", "*TCombobox*Listbox.highlightThickness", "0")
+        
+        # Configurazione aggiuntiva per migliorare il contrasto
+        self.root.tk.call("option", "add", "*TCombobox*Listbox.background", "#0F1A2E")
+        self.root.tk.call("option", "add", "*TCombobox*Listbox.foreground", ThemeColors.WHITE)
+        self.root.tk.call("option", "add", "*TCombobox*Listbox.selectBackground", ThemeColors.ORANGE)
+        self.root.tk.call("option", "add", "*TCombobox*Listbox.selectForeground", ThemeColors.MAIN_BG)
+
+        main = tk.Frame(dlg, bg=ThemeColors.MAIN_BG)
+        main.pack(fill="both", expand=True, padx=30, pady=30)
+
+        tk.Label(
+            main,
+            text="Configurazione Trasportatore",
+            font=("Arial", 16, "bold"),
+            fg=ThemeColors.ORANGE,
+            bg=ThemeColors.MAIN_BG,
+        ).pack(anchor="w", pady=(0, 24))
+
+        tk.Label(
+            main,
+            text="Trasportatore",
+            font=("Arial", 11),
+            fg=ThemeColors.LIGHT_GRAY,
+            bg=ThemeColors.MAIN_BG,
+        ).pack(anchor="w", pady=(0, 8))
+
+        nomi = [t["nome"] for t in trasportatori]
+        var_trasp = tk.StringVar(value=nomi[0] if nomi else "")
+
+        combo_style = ttk.Style(dlg)
+        combo_style.configure(
+            "Custom.TCombobox",
+            fieldbackground="#0F1A2E",
+            background="#0F1A2E",
+            foreground=ThemeColors.WHITE,
+            arrowcolor=ThemeColors.ORANGE,
+            bordercolor=ThemeColors.ORANGE,
+            relief="flat",
+            insertcolor=ThemeColors.WHITE,
+            lightcolor="#1A1A2E",
+            darkcolor="#1A1A2E",
+        )
+
+        combo = ttk.Combobox(
+            main,
+            values=nomi,
+            textvariable=var_trasp,
+            state="readonly",
+            style="Custom.TCombobox",
+            font=("Arial", 12),
+            height=10,
+        )
+        combo.pack(fill="x", ipady=8)
+
+        # ═══ CONFIGURAZIONE AVANZATA LISTBOX DROPDOWN ═══
+        def configure_dropdown():
+            try:
+                # Trova la finestra dropdown della combobox
+                popdown = combo.tk.eval(f'ttk::combobox::PopdownWindow {combo}')
+                listbox = f'{popdown}.f.l'
+                
+                # Configurazione completa per massima leggibilità
+                combo.tk.call(listbox, 'configure', '-background', '#0F1A2E')
+                combo.tk.call(listbox, 'configure', '-foreground', ThemeColors.WHITE)
+                combo.tk.call(listbox, 'configure', '-selectbackground', ThemeColors.ORANGE)
+                combo.tk.call(listbox, 'configure', '-selectforeground', ThemeColors.MAIN_BG)
+                combo.tk.call(listbox, 'configure', '-font', 'Arial 12')
+                combo.tk.call(listbox, 'configure', '-borderwidth', '0')
+                combo.tk.call(listbox, 'configure', '-highlightthickness', '0')
+                combo.tk.call(listbox, 'configure', '-relief', 'flat')
+                
+                # Migliora la selezione e l'active state
+                combo.tk.call(listbox, 'configure', '-activestyle', 'dotbox')
+                
+            except Exception as e:
+                print(f"Configurazione dropdown fallita: {e}")
+        
+        # Configura quando viene aperto il dropdown
+        def on_dropdown_open(event=None):
+            dlg.after(10, configure_dropdown)
+        
+        # Bind all'evento di apertura
+        combo.bind('<Button-1>', on_dropdown_open)
+        combo.bind('<space>', on_dropdown_open)
+        combo.bind('<Return>', on_dropdown_open)
+        
+        # Esegui anche dopo che il widget è renderizzato
+        dlg.after(100, configure_dropdown)
+
+        percent_var = tk.StringVar(value="10")
+        if scelta == "GECO":
+            tk.Label(
+                main,
+                text="Percentuale Variazione (0–100)",
+                font=("Arial", 11),
+                fg=ThemeColors.LIGHT_GRAY,
+                bg=ThemeColors.MAIN_BG,
+            ).pack(anchor="w", pady=(24, 8))
+
+            validate_cmd = (dlg.register(self._is_valid_percent), "%P")
+            percent_entry = tk.Entry(
+                main,
+                textvariable=percent_var,
+                font=("Arial", 13),
+                bg="#0F1A2E",
+                fg=ThemeColors.WHITE,
+                insertbackground=ThemeColors.ORANGE,
+                relief="flat",
+                borderwidth=0,
+                validate="key",
+                validatecommand=validate_cmd,
+            )
+            percent_entry.pack(fill="x", ipady=10)
+
+            tk.Label(
+                main,
+                text="Lascia vuoto o inserisci 1 per nessuna variazione",
+                font=("Arial", 9, "italic"),
+                fg="#999",
+                bg=ThemeColors.MAIN_BG,
+            ).pack(anchor="w", pady=(6, 0))
+
+        footer = tk.Frame(main, bg=ThemeColors.MAIN_BG)
+        footer.pack(fill="x", pady=(30, 0))
+
+        def conferma():
+            nome = combo.get().strip()
+            if not nome:
+                messagebox.showwarning("Attenzione", "Seleziona un trasportatore.", parent=dlg)
+                return
+            sel = next((t for t in trasportatori if t["nome"] == nome), None)
+            if not sel:
+                messagebox.showerror("Errore", "Trasportatore non trovato.", parent=dlg)
+                return
+
+            perc = 1
+            if scelta == "GECO" and percent_var.get().strip():
+                try:
+                    val = float(percent_var.get().replace(",", "."))
+                    if not 0 <= val <= 100:
+                        raise ValueError
+                    perc = val
+                except Exception:
+                    messagebox.showerror("Errore", "Percentuale non valida (0-100).", parent=dlg)
+                    return
+
+            dlg.result = (sel, perc)
+            dlg.destroy()
+
+        def annulla():
+            dlg.result = None
+            dlg.destroy()
+
+        tk.Button(
+            footer,
+            text="Annulla",
+            font=("Arial", 11, "bold"),
+            bg=ThemeColors.MAIN_BG,
+            fg=ThemeColors.LIGHT_GRAY,
+            activebackground="#1F2937",
+            activeforeground=ThemeColors.ORANGE,
+            relief="solid",
+            borderwidth=1,
+            highlightthickness=1,
+            highlightbackground=ThemeColors.ORANGE,
+            highlightcolor=ThemeColors.ORANGE_ACTIVE,
+            command=annulla,
+        ).pack(side="right", padx=(10, 0), ipadx=12, ipady=6)
+
+        tk.Button(
+            footer,
+            text="Conferma",
+            font=("Arial", 11, "bold"),
+            bg=ThemeColors.ORANGE,
+            fg=ThemeColors.MAIN_BG,
+            activebackground=ThemeColors.ORANGE_ACTIVE,
+            activeforeground=ThemeColors.MAIN_BG,
+            relief="flat",
+            borderwidth=0,
+            command=conferma,
+        ).pack(side="right", ipadx=16, ipady=6)
+
+        combo.bind("<Return>", lambda e: conferma())
+        dlg.bind("<Escape>", lambda e: annulla())
+
+        dlg.wait_window()
+        return getattr(dlg, "result", None)
+
+    def _carica_trasportatori(self):
+        base_dir = os.path.dirname(os.path.abspath(__file__))
+        path = os.path.normpath(
+            os.path.join(base_dir, "..", "utils", "Db", "Trasportatori.json")
+        )
+        with open(path, encoding="utf-8") as f:
+            return json.load(f)
+
+    @staticmethod
+    def _is_valid_percent(val):
+        if not val.strip():
+            return True
+        try:
+            return 0 <= float(val.replace(",", ".")) <= 100
+        except ValueError:
+            return False
+
+
+
+
+
 
 
 

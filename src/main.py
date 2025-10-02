@@ -3,6 +3,7 @@ from views.mainView import MainView
 from controllers.AppController import AppController
 from controllers.CSVController import CSVController
 from controllers.ElabController import ElabController
+from utils.ui.theme_colors import ThemeColors
 from utils.config.configuration import ELABORATORE_CONFIG
 from utils.config.configuration import OUTPUT_COLUMNS
 
